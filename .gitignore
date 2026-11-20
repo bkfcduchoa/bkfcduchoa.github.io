@@ -4,7 +4,15 @@
 # Hugo
 resources/
 public/
-jsconfig.json
-node_modules/
-go.sum
 .hugo_build.lock
+hugo_stats.json
+**/assets/jsconfig.json
+jsconfig.json
+go.sum
+
+# Node.js
+node_modules/
+
+# Pagefind search index
+pagefind/
+static/pagefind/

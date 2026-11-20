@@ -1,0 +1,11 @@
+{{/*
+    Embed a Google Docs document. Ported from the old Bootstrap theme, which the Kit dropped.
+
+    Parameters
+    ----------
+    src : str
+        Google Docs URL for embedding.
+*/}}
+<div class="gdocs-embed relative w-full overflow-hidden" style="aspect-ratio: 960 / 569;">
+  <iframe class="absolute inset-0 w-full h-full" src="{{ .Get "src" }}" frameborder="0" width="960" height="569" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true" loading="lazy"></iframe>
+</div>

@@ -16,5 +16,9 @@ max_line_length = 100
 [*.md]
 trim_trailing_whitespace = false
 
-[layouts/shortcodes/*.html]
+[layouts/_shortcodes/*.html]
 insert_final_newline = false
+
+# Profile text keeps Markdown hard line breaks (two trailing spaces)
+[data/authors/*.yaml]
+trim_trailing_whitespace = false

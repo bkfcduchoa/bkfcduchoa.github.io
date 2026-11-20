@@ -1,12 +1,18 @@
 name: Deploy website to GitHub Pages
 
+# Follows the HugoBlox Kit starter's build and deploy workflows, merged into one
+# file and using npm (the repo's package manager) instead of pnpm.
+
 env:
-  WC_HUGO_VERSION: '0.124.1'
+  NODE_VERSION: '24'
 
 on:
   # Trigger the workflow every time you push to the `main` branch
   push:
-    branches: ["main"]
+    branches: ['main']
+  # Check pull requests without deploying them
+  pull_request:
+    branches: ['main']
   # Allows you to run this workflow manually from the Actions tab on GitHub.
   workflow_dispatch:
 
@@ -17,48 +23,80 @@ permissions:
   id-token: write
 
 concurrency:
-  group: "pages"
-  cancel-in-progress: false
+  group: pages-${{ github.event_name == 'pull_request' && github.head_ref || 'deploy' }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
   # Build website
   build:
     if: github.repository_owner != 'HugoBlox'
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           # Fetch history for Hugo's .GitInfo and .Lastmod
           fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+
+      - name: Install dependencies (Tailwind CSS, Pagefind)
+        run: npm ci
+
+      - name: Get Hugo version
+        # The Kit needs an exact Hugo extended version; it is set in hugoblox.yaml.
+        run: |
+          VERSION=$(yq '.build.hugo_version' hugoblox.yaml)
+          if [[ ! "$VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "::error::hugoblox.yaml build.hugo_version is missing or invalid: '$VERSION'"
+            exit 1
+          fi
+          echo "HUGO_VERSION=$VERSION" >> "$GITHUB_ENV"
+          echo "Using Hugo version: $VERSION"
+
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v3
         with:
-          hugo-version: ${{ env.WC_HUGO_VERSION }}
+          hugo-version: ${{ env.HUGO_VERSION }}
           extended: true
-      - uses: actions/cache@v4
+
+      # Cache Hugo modules and processed resources
+      - uses: actions/cache@v5
         with:
-          path: /tmp/hugo_cache_runner/
-          key: ${{ runner.os }}-hugomod-${{ hashFiles('**/go.mod') }}
+          path: |
+            /tmp/hugo_cache_runner/
+            resources/
+          key: ${{ runner.os }}-hugo-${{ hashFiles('**/go.mod', 'package-lock.json', 'assets/**/*', 'config/**/*') }}
           restore-keys: |
-            ${{ runner.os }}-hugomod-
+            ${{ runner.os }}-hugo-
+
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v5
+
       - name: Build with Hugo
         env:
           HUGO_ENVIRONMENT: production
         run: |
           echo "Hugo Cache Dir: $(hugo config | grep cachedir)"
           hugo --minify --baseURL "${{ steps.pages.outputs.base_url }}/"
+
+      - name: Generate Pagefind search index
+        run: npm run pagefind
+
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v4
         with:
           path: ./public
 
   # Deploy website to GitHub Pages hosting
   deploy:
-    if: github.repository_owner != 'HugoBlox'
+    if: github.repository_owner != 'HugoBlox' && github.event_name != 'pull_request'
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}

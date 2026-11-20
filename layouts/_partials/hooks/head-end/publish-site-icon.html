@@ -1,0 +1,3 @@
+{{/* The slides module links its favicon to the fixed path /media/icon.png.
+     Publish assets/media/icon.png there so that link resolves. */}}
+{{ with resources.Get "media/icon.png" }}{{ .Publish }}{{ end }}

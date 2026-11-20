@@ -1,0 +1,93 @@
+{{/* Compact list view: a port of the old Bootstrap theme's `compact` view.
+     Title, summary, metadata (authors, last-updated date, reading time and categories for
+     posts; dates and location for events), the page's links (such as an event's "Follow")
+     and a 150px featured-image thumbnail. Used by the home collections and the section lists.
+     In a section list of events, each new year gets a heading, as on the old /event/ page. */}}
+{{ $item := .item }}
+{{ $is_event := eq $item.Type "events" }}
+{{ $link := $item.RelPermalink }}
+{{ $target := "" }}
+{{ with $item.Params.external_link }}
+  {{ $link = . }}
+  {{ $target = "target=\"_blank\" rel=\"noopener\"" }}
+{{ end }}
+
+{{/* Summary: front matter summary as Markdown; otherwise the plain-text automatic summary. */}}
+{{ $summary := partial "functions/get_summary" $item }}
+{{ if $item.Params.summary }}
+  {{ $summary = $item.Params.summary | markdownify | emojify }}
+{{ end }}
+
+{{/* Year heading: only in a section list (the collection block passes its block map as `page`). */}}
+{{ if and $is_event (not (reflect.IsMap .page)) }}
+  {{ $year := $item.Date.Year }}
+  {{ $first_of_year := index (where $item.CurrentSection.Pages.ByDate.Reverse ".Date.Year" $year) 0 }}
+  {{ if eq $first_of_year $item }}
+    <h3 class="mt-8 mb-2 w-full text-2xl font-bold text-gray-900 dark:text-white">{{ $year }}</h3>
+  {{ end }}
+{{ end }}
+
+<article class="flex w-full min-w-0 items-start gap-4 border-b border-gray-200 py-6 last:border-b-0 dark:border-gray-700">
+  <div class="min-w-0 flex-1">
+    <h3 class="text-lg font-semibold leading-snug text-gray-900 dark:text-white">
+      <a class="hover:text-primary-600 dark:hover:text-primary-400" href="{{ $link }}" {{ $target | safeHTMLAttr }}>{{ $item.Title }}</a>
+    </h3>
+
+    {{ with $summary }}
+    <a class="mt-1 block break-words text-gray-600 dark:text-gray-300" href="{{ $link }}" {{ $target | safeHTMLAttr }}>{{ . }}</a>
+    {{ end }}
+
+    <div class="mt-2 flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-gray-500 dark:text-gray-400">
+      {{ if $is_event }}
+        <span>{{ partial "functions/get_event_dates" $item }}</span>
+        {{ with $item.Params.location }}<span aria-hidden="true">&middot;</span><span>{{ . }}</span>{{ end }}
+      {{ end }}
+
+      {{ $parts := slice }}
+      {{ with $item.Params.authors }}
+        {{ $names := slice }}
+        {{ range . }}
+          {{ $profile := partial "functions/get_author_profile" (dict "slug" (urlize .)) }}
+          {{ $names = $names | append ($profile.title | default (humanize .)) }}
+        {{ end }}
+        {{ $parts = $parts | append (delimit $names ", ") }}
+      {{ end }}
+      {{ if and (not $is_event) (ne $item.Type "page") (ne $item.Params.show_date false) }}
+        {{ $date := time.Format (site.Params.hugoblox.locale.date_format | default ":date_long") $item.Lastmod }}
+        {{ if not ($item.Lastmod.Equal $item.Date) }}{{ $date = printf "%s %s" (i18n "last_updated") $date }}{{ end }}
+        {{ $parts = $parts | append $date }}
+      {{ end }}
+      {{ if and (eq $item.Type "blog") (ne site.Params.hugoblox.content.reading_time.enable false) (ne $item.Params.reading_time false) }}
+        {{ $parts = $parts | append (printf "%d %s" $item.ReadingTime (i18n "minute_read")) }}
+      {{ end }}
+      {{ range $i, $part := $parts }}
+        {{ if or $i $is_event }}<span aria-hidden="true">&middot;</span>{{ end }}<span>{{ $part }}</span>
+      {{ end }}
+      {{ with $item.GetTerms "categories" }}
+        {{ if or $parts $is_event }}<span aria-hidden="true">&middot;</span>{{ end }}
+        <span class="inline-flex items-center gap-1">
+          {{ partial "functions/get_icon" (dict "name" "hero/folder" "attributes" "style=\"height: 1em\" class='inline-block'") }}
+          {{- range $i, $term := . -}}
+            {{- if $i }}, {{ end -}}<a class="hover:text-primary-600 dark:hover:text-primary-400" href="{{ $term.RelPermalink }}">{{ $term.LinkTitle }}</a>
+          {{- end -}}
+        </span>
+      {{ end }}
+    </div>
+
+    {{ if gt (len (partial "functions/build_links" (dict "page" $item "is_list" 1))) 0 }}
+    <div class="mt-3">
+      {{ partial "page_links" (dict "page" $item "is_list" 1) }}
+    </div>
+    {{ end }}
+  </div>
+
+  {{ with partial "functions/get_featured_image" $item }}
+    {{ $image := . }}
+    {{ if and (reflect.IsImageResourceProcessable .) (ne .MediaType.SubType "gif") }}
+      {{ $image = .Resize "150x webp" }}
+    {{ end }}
+    <a class="shrink-0" href="{{ $link }}" {{ $target | safeHTMLAttr }}>
+      <img class="h-auto w-24 rounded sm:w-[150px]" src="{{ $image.RelPermalink }}" width="{{ $image.Width }}" height="{{ $image.Height }}" alt="{{ $item.Title }}" loading="lazy" />
+    </a>
+  {{ end }}
+</article>

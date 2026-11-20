@@ -1,7 +1,7 @@
 ---
 title: 📣📣 Ngày hội Tư Vấn Tuyển Sinh 📣📣
 
-event: Ngày hội Tư Vấn Tuyển Sinh
+event_name: Ngày hội Tư Vấn Tuyển Sinh
 event_url:
 
 location: Đại học Bách Khoa TP.HCM
@@ -15,14 +15,14 @@ address:
 summary: Ngày hội tư vấn tuyển sinh, giúp các bạn học sinh lớp 12 có thêm thông tin về ngành học, trường học, cũng như cơ hội gặp gỡ và trò chuyện với các sinh viên đến từ nhiều trường đại học khác nhau.
 abstract: ''
 
-# Talk start and end times.
+# Event start and end times.
 #   End time can optionally be hidden by prefixing the line with `#`.
-date: '2020-06-21'
-date_end: '2020-06-21'
-all_day: true
+event_start: '2020-06-21'
+event_end: '2020-06-21'
+event_all_day: true
 
-# Schedule page publish date (NOT talk date).
-publishDate: '2020-06-01'
+# Page publish date (NOT the event date).
+date: '2020-06-01'
 
 authors: []
 tags: []
@@ -35,8 +35,7 @@ image:
   focal_point: Right
 
 links:
-  - icon: facebook
-    icon_pack: fab
+  - icon: brands/facebook
     name: Follow
     url: https://facebook.com/tuvantuyensinhbachkhoa
 url_code: ''
@@ -47,14 +46,14 @@ url_video: ''
 # Markdown Slides (optional).
 #   Associate this talk with Markdown slides.
 #   Simply enter your slide deck's filename without extension.
-#   E.g. `slides = "example-slides"` references `content/slides/example-slides.md`.
-#   Otherwise, set `slides = ""`.
+#   E.g. `slides: example` references `content/slides/example/index.md`.
+#   Otherwise, set `slides: ''`.
 slides: ''
 
 # Projects (optional).
 #   Associate this post with one or more of your projects.
 #   Simply enter your project's folder or file name without extension.
-#   E.g. `projects = ["internal-project"]` references `content/project/deep-learning/index.md`.
+#   E.g. `projects: [internal-project]` references `content/projects/internal-project/index.md`.
 #   Otherwise, set `projects = []`.
 projects: []
 ---

@@ -1,0 +1,20 @@
+{{/* Function to get logo URL for JSONLD. */}}
+{{/* Inputs: page context */}}
+{{/* Output: logo URL (URL) */}}
+{{/* Local copy of the Kit's function: the Kit reads `.Permalink` from the dict that
+     functions/get_logo and functions/get_site_icon return, so the JSON-LD logo was null.
+     The processed image is in the dict's `resource`. */}}
+
+{{ $logo_url := "" }}
+{{ if resources.Get "media/logo.png" | or (resources.Get "media/logo.svg") }}
+  {{/* !CACHED! Can safely cache this site logo variant */}}
+  {{ with (partialCached "functions/get_logo" (dict "constraint" "fit" "size" 192)).resource }}
+    {{ $logo_url = .Permalink }}
+  {{ end }}
+{{ else }}
+  {{ with (partial "functions/get_site_icon" 192).resource }}
+    {{ $logo_url = .Permalink }}
+  {{ end }}
+{{ end }}
+
+{{ return $logo_url }}

@@ -1,0 +1,4 @@
+{{/* The old site published the original album photos (the gallery lightbox opened them), at
+     /media/albums/<album>/<file>. The gallery block publishes only resized copies, so publish the
+     originals too, to keep those URLs. */}}
+{{ if .IsHome }}{{ range resources.Match "media/albums/**" }}{{ .Publish }}{{ end }}{{ end }}

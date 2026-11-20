@@ -2,7 +2,6 @@
 # Documentation: https://sourcethemes.com/academic/docs/managing-content/
 
 title: "Hướng dẫn"
-subtitle: "Dành cho các bạn học sinh"
 summary: "Hướng dẫn dành cho các bạn học sinh"
 authors: ["miti99"]
 tags: ["Hướng dẫn"]
@@ -27,6 +26,7 @@ image:
 #   Otherwise, set `projects = []`.
 projects: []
 ---
+_Dành cho các bạn học sinh_
 
 Trang được thiết kê với giao diện khá đơn giản. Tại [Trang chủ](/) các bạn sẽ thấy danh sách các bài viết, nhấn vào bài viết bất kì để đọc. Ngoài ra, với mỗi bạn viết, chúng mình đều thêm các **tags** thích hợp, ví dụ [_Toán_](/tag/toan/), [_Lý_](/tag/ly/), [_Hóa_](/tag/hoa/),... các bạn kiểm tra tại [đây](/tags)
 

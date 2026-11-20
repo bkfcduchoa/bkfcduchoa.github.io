@@ -1,119 +1,134 @@
-# SITE SETUP
-# Guide: https://docs.hugoblox.com/tutorial/
-# Documentation: https://docs.hugoblox.com/
-# This file is formatted using YAML syntax - learn more at https://learnxinyminutes.com/docs/yaml/
+# ══════════════════════════════════════════════════════════════════════════════
+# HUGO BLOX CONFIGURATION
+# Schema: hugoblox.com/schema/v2
+# Documentation: https://hugoblox.com/docs/
+# ══════════════════════════════════════════════════════════════════════════════
+hugoblox:
+  schema: "2.0"
 
-# Appearance
+  # ────────────────────────────────────────────────────────────────────────────
+  # IDENTITY
+  # ────────────────────────────────────────────────────────────────────────────
+  identity:
+    name: "BKFC Đức Hoà"
+    organization: "BKFC Đức Hoà"
+    type: organization # person | organization | local_business
+    tagline: ""
+    description: "BKFC - Tôi yêu Bách Khoa"
+    social:
+      twitter: ""
 
-appearance:
-  theme_day: minimal
-  theme_night: minimal
-  font: minimal
-  font_size: L
+  # ────────────────────────────────────────────────────────────────────────────
+  # THEME
+  # `minimal` was the old day and night theme; its blue is kept as the primary colour.
+  # ────────────────────────────────────────────────────────────────────────────
+  theme:
+    mode: system
+    pack: "minimal"
+    colors:
+      primary: "#1565c0"
+      secondary: ""
+      neutral: ""
 
-# SEO
+  # ────────────────────────────────────────────────────────────────────────────
+  # TYPOGRAPHY (data/fonts/minimal.yaml: Montserrat, Roboto, Roboto Mono)
+  # ────────────────────────────────────────────────────────────────────────────
+  typography:
+    pack: "minimal"
 
-marketing:
-  seo:
-    site_type: Organization
-    local_business_type: ''
-    org_name: 'BKFC Đức Hoà'
-    description: 'BKFC - Tôi yêu Bách Khoa'
-    twitter: ''
-  analytics:
-    google_analytics: ''
-    baidu_tongji: ''
-    google_tag_manager: ''
-    microsoft_clarity: ''
-  verification:
-    google: ''
-    baidu: ''
+  # ────────────────────────────────────────────────────────────────────────────
+  # LAYOUT
+  # ────────────────────────────────────────────────────────────────────────────
+  layout:
+    radius: "md"
+    spacing: "comfortable"
+    avatar_shape: circle
 
-# Site header
-
-header:
-  navbar:
+  # ────────────────────────────────────────────────────────────────────────────
+  # HEADER
+  # ────────────────────────────────────────────────────────────────────────────
+  header:
     enable: true
-    align: l
-    show_logo: true
-    show_language: false
-    show_day_night: true
-    show_search: true
-    highlight_active_link: true
+    style: navbar
+    sticky: true
+    align: left
+    search: true
+    theme_toggle: true
+    theme_picker: false
+    language_switcher: false
+    cta:
+      enable: false
 
-# Site footer
+  # ────────────────────────────────────────────────────────────────────────────
+  # FOOTER
+  # ────────────────────────────────────────────────────────────────────────────
+  footer:
+    style: minimal
+    language_switcher: false
+    text: ""
 
-footer:
+  # ────────────────────────────────────────────────────────────────────────────
+  # COPYRIGHT
+  # ────────────────────────────────────────────────────────────────────────────
   copyright:
-    notice: '&copy; 2020 - {year} BKFC - THPT Đức Hòa. This work is licensed under {license}'
+    notice: "&copy; 2020 - {year} BKFC - THPT Đức Hòa. This work is licensed under {license}"
     license:
-      enable: true
+      type: cc
       allow_derivatives: false
       share_alike: true
       allow_commercial: false
 
-# Localization
+  # ────────────────────────────────────────────────────────────────────────────
+  # CONTENT
+  # ────────────────────────────────────────────────────────────────────────────
+  content:
+    math:
+      enable: true
+    toc:
+      enable: true
+    reading_time:
+      enable: true
 
-locale:
-  date_format: 'Jan 2, 2006'
-  time_format: '3:04 PM'
-  address_format: en-us
-
-# Site features
-
-features:
-  syntax_highlighter:
-    theme_light: github-light
-    theme_dark: dracula
-  math:
+  # ────────────────────────────────────────────────────────────────────────────
+  # SEARCH (Pagefind index, built after Hugo)
+  # ────────────────────────────────────────────────────────────────────────────
+  search:
     enable: true
-  privacy_pack:
-    enable: false
-  repository:
-    url: 'https://github.com/bkfcduchoa/bkfcduchoa.github.io'
-    content_dir: content
-    branch: main
-  avatar:
-    gravatar: false
-    shape: circle
-  comment:
+
+  # ────────────────────────────────────────────────────────────────────────────
+  # COMMENTS
+  # ────────────────────────────────────────────────────────────────────────────
+  comments:
+    enable: true
     provider: giscus
-    disqus:
-      shortname: ''
-      show_count: true
-    commento:
-      url: ''
     giscus:
-      repo: 'bkfcduchoa/bkfcduchoa.github.io'
-      repo_id: 'MDEwOlJlcG9zaXRvcnkzMDAzNTE2Mjg'
-      category: 'Announcements'
-      category_id: 'DIC_kwDOEecAjM4CfTNY'
+      repo: "bkfcduchoa/bkfcduchoa.github.io"
+      repo_id: "MDEwOlJlcG9zaXRvcnkzMDAzNTE2Mjg"
+      category: "Announcements"
+      category_id: "DIC_kwDOEecAjM4CfTNY"
       theme: preferred_color_scheme
       language_code: en
       mapping: pathname
-  search:
-    provider: wowchemy
-    algolia:
-      app_id: ''
-      api_key: ''
-      index_name: ''
-      show_logo: false
-  map:
-    provider: 'mapnik'
-    api_key: ''
-    zoom: 15
 
-# Extensions
-
-extensions:
-  cms:
-    branch: main
-    local_backend: false
-  academicons:
+  # ────────────────────────────────────────────────────────────────────────────
+  # REPOSITORY ("Edit this page" links)
+  # ────────────────────────────────────────────────────────────────────────────
+  repository:
     enable: true
+    url: "https://github.com/bkfcduchoa/bkfcduchoa.github.io"
+    branch: main
+    content_dir: content
 
-# Security
+  # ────────────────────────────────────────────────────────────────────────────
+  # LOCALE
+  # ────────────────────────────────────────────────────────────────────────────
+  locale:
+    date_format: "Jan 2, 2006"
+    time_format: "3:04 PM"
+    address_format: en-us
 
-security:
-  # Allow frame for embedding speaker notes in slides
-  allow_frame: true
+  # ────────────────────────────────────────────────────────────────────────────
+  # SECURITY (allow framing for the slides speaker-notes window)
+  # ────────────────────────────────────────────────────────────────────────────
+  security:
+    frame_options: allow

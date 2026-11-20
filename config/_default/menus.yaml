@@ -1,30 +1,27 @@
 # Navigation Links
-#   To link a homepage widget, specify the URL as a hash `#` followed by the filename of the
-#     desired widget in your `content/home/` folder.
+#   To link a homepage section, use `/#` followed by the section's `id` in `content/_index.md`.
 #   The weight parameter defines the order that the links will appear in.
 
-main:
+main: &main
   - name: Trang chủ
-    url: '#hero'
+    url: /#hero
     weight: 10
   - name: Giới thiệu
-    url: '#about'
+    url: /#about
     weight: 20
   - name: Bài viết
-    url: '#posts'
+    url: /#posts
     weight: 30
   - name: Thư viện ảnh
-    url: '#gallery'
+    url: /#gallery
     weight: 40
   - name: Thành viên
-    url: '#people'
+    url: /#people
     weight: 50
   - name: Liên hệ
-    url: '#contact'
+    url: /#contact
     weight: 60
 
-# Link to a PDF of your resume/CV from the menu.
-# To enable, copy your resume/CV to `static/uploads/resume.pdf` and uncomment the lines below.
-#  - name: CV
-#    url: uploads/resume.pdf
-#    weight: 70
+# Docs pages (the courses) open their own sidebar from the mobile menu button, and it lists the
+# `sidebar` menu after the course tree. Repeat the main menu there so it stays reachable on phones.
+sidebar: *main

@@ -1,0 +1,83 @@
+# Vietnamese text for theme strings that the Kit's own i18n/vi.yaml lacks.
+# Hugo merges this file with the Kit's, so only missing or changed keys belong here.
+
+# Lists
+
+- id: read_more
+  translation: Đọc thêm
+
+# Contact info block
+
+- id: block_contact_title
+  translation: Liên hệ
+
+- id: block_contact_visit_title
+  translation: Địa chỉ
+
+- id: block_contact_office_hours
+  translation: Giờ làm việc
+
+- id: block_contact_view_on_map
+  translation: Xem trên bản đồ
+
+- id: block_contact_connect_title
+  translation: Kết nối
+
+- id: block_contact_follow_us
+  translation: Theo dõi chúng tôi
+
+- id: block_contact_follow_me
+  translation: Tìm chúng tôi trên
+
+- id: block_contact_prospective_title
+  translation: Thành viên tương lai
+
+- id: block_contact_form_title
+  translation: Gửi tin nhắn
+
+- id: block_contact_form_name
+  translation: Họ và tên
+
+- id: block_contact_form_email
+  translation: Email
+
+- id: block_contact_form_subject
+  translation: Chủ đề
+
+- id: block_contact_form_message
+  translation: Nội dung
+
+- id: block_contact_form_submit
+  translation: Gửi
+
+# Search modal (layouts/_partials/components/search-modal.html)
+
+- id: search_all_results
+  translation: Tất cả kết quả
+
+- id: search_quick_actions
+  translation: Truy cập nhanh
+
+- id: search_searching
+  translation: Đang tìm kiếm...
+
+- id: search_finding_for
+  translation: Đang tìm kết quả cho
+
+- id: search_no_results_for
+  translation: Không có kết quả cho
+
+- id: search_clear
+  translation: Xóa tìm kiếm
+
+- id: search_navigate
+  translation: Di chuyển
+
+- id: search_select
+  translation: Chọn
+
+- id: search_filters
+  translation: bộ lọc
+
+- id: search_untitled
+  translation: Không có tiêu đề

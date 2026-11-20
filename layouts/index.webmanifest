@@ -1,0 +1,24 @@
+{{- /* Web app manifest. Local copy of the Kit's template: the Kit reads `.RelPermalink` from the
+       dict that functions/get_site_icon returns, which renders "<no value>"; this uses `.resource`.
+       The theme colour is the site's primary blue (hugoblox.theme.colors.primary), as on the old site. */ -}}
+{{- $theme_color := site.Params.hugoblox.theme.colors.primary | default "#1565c0" -}}
+{{- $icon192 := (partial "functions/get_site_icon" 192).resource -}}
+{{- $icon512 := (partial "functions/get_site_icon" 512).resource -}}
+{
+  "name": "{{ site.Title }}",
+  "short_name": "{{ site.Title }}",
+  "lang": "{{ site.Language.Locale | default "en-us" }}",
+  "theme_color": "{{ $theme_color }}",
+  "background_color": "{{ $theme_color }}",
+  "icons": [{
+    "src": "{{ with $icon192 }}{{ .RelPermalink }}{{ end }}",
+    "sizes": "192x192",
+    "type": "image/png"
+    }, {
+    "src": "{{ with $icon512 }}{{ .RelPermalink }}{{ end }}",
+    "sizes": "512x512",
+    "type": "image/png"
+     }],
+  "display": "standalone",
+  "start_url": "{{ site.Home.RelPermalink }}?utm_source=web_app_manifest"
+}

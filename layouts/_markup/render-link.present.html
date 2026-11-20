@@ -1,0 +1,3 @@
+{{- /* Copy of the blox link render hook for this output format. Without it Hugo picks blox's
+     render-link.backlinks.json here, which prints nothing, so every Markdown link lost its text. */ -}}
+<a href="{{ .Destination | safeURL }}"{{ with .Title}} title="{{ . }}"{{ end }}{{ if strings.HasPrefix .Destination "http" }} target="_blank" rel="noopener"{{ end }}>{{ .Text | safeHTML }}</a>
