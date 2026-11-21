@@ -20,13 +20,14 @@ hugoblox:
 
   # ────────────────────────────────────────────────────────────────────────────
   # THEME
-  # `minimal` was the old day and night theme; its blue is kept as the primary colour.
+  # `bkfc` is the site's own pack (data/themes/bkfc.yaml), in the HCMUT logo colours.
+  # Leave `colors` empty: a value there overrides the pack in both modes.
   # ────────────────────────────────────────────────────────────────────────────
   theme:
     mode: system
-    pack: "minimal"
+    pack: "bkfc"
     colors:
-      primary: "#1565c0"
+      primary: ""
       secondary: ""
       neutral: ""
 

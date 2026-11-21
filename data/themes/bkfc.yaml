@@ -1,0 +1,45 @@
+# HugoBlox Theme Pack for BKFC THPT Đức Hòa, a team under HCMUT (Trường Đại học Bách khoa).
+# Colours come from the official HCMUT logo (hcmut.edu.vn/img/logo.png): navy #032b91,
+# sky blue #1488db and the light grey outline #f7f5f6.
+# A hex colour fills the 500 slot; the Kit mixes it with white and black for the other shades.
+
+hugoblox:
+  meta:
+    format: "hugoblox-theme@1"
+    name: "BKFC"
+    vendor: "bkfcduchoa"
+    version: "1.0.0"
+    license: "MIT"
+    description: "HCMUT navy and sky blue, white by day and navy by night"
+
+  type: "dual"
+
+  light:
+    colors:
+      primary: "#032b91" # HCMUT navy: links and buttons, readable on white
+      secondary: "#1488db" # HCMUT sky blue: accents
+      neutral: "slate" # Blue-tinted greys
+    surfaces:
+      background: "#ffffff"
+      foreground: "#1e293b"
+      header:
+        background: "#ffffff"
+        foreground: "#032b91"
+      footer:
+        background: "#f7f5f6" # Logo outline grey
+        foreground: "#334155"
+
+  dark:
+    colors:
+      primary: "#1488db" # Sky blue: navy is too dark to read on a dark background
+      secondary: "#032b91"
+      neutral: "slate"
+    surfaces:
+      background: "#071538" # Deep shade of HCMUT navy
+      foreground: "#e2e8f0"
+      header:
+        background: "#040d26"
+        foreground: "#e2e8f0"
+      footer:
+        background: "#040d26"
+        foreground: "#94a3b8"

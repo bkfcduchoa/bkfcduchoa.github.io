@@ -29,8 +29,8 @@ sections:
       layout: split-right
       background:
         gradient:
-          start: '#004ba0'
-          end: '#1976d2'
+          start: '#032b91'
+          end: '#1488db'
         text_color_light: true
   # The rest of the old hero text (a list and links), which the hero block cannot render as Markdown.
   - block: markdown
@@ -47,8 +47,8 @@ sections:
     design:
       background:
         gradient:
-          start: '#004ba0'
-          end: '#1976d2'
+          start: '#032b91'
+          end: '#1488db'
         text_color_light: true
   - block: resume-biography-3
     id: about

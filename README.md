@@ -27,6 +27,7 @@ Pushing to `main` builds and deploys the site through `.github/workflows/publish
 - `data/authors/<slug>.yaml` and `assets/media/authors/<slug>.*`: member profiles and avatars.
 - `assets/media/albums/gallery/`: photos for the home page gallery.
 - `config/_default/params.yaml`: site settings (`hugoblox:`).
+- `data/themes/bkfc.yaml`: the site's colour theme (HCMUT logo colours), picked by `theme.pack` in `params.yaml`.
 - `layouts/`: local templates. Some port features of the old theme, such as the `compact` list
   view and the tag cloud. Others are copies of Kit templates with a fix. Each file's header
   comment says why it exists. Check the copies when you upgrade the Kit.
