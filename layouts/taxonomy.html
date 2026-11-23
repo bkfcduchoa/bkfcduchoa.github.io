@@ -3,6 +3,22 @@
   <header class="page-head">
     <h1>{{ .Title }}</h1>
   </header>
+  {{- if eq .Data.Plural "authors" }}
+  <ul class="card-grid list-grid">
+    {{- range .Pages.ByTitle }}
+    <li>
+      <article class="card author-card">
+        {{ partial "avatar.html" (dict "page" . "size" 64) }}
+        <div>
+          <h3><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h3>
+          {{- with .Params.role }}<p class="meta">{{ . }}</p>{{ end }}
+          <p class="meta">{{ len .Pages }} bài viết</p>
+        </div>
+      </article>
+    </li>
+    {{- end }}
+  </ul>
+  {{- else }}
   {{- with .Data.Terms.ByCount }}
   <ul class="chips list-grid">
     {{- range . }}
@@ -10,7 +26,8 @@
     {{- end }}
   </ul>
   {{- else }}
-  <p>Chưa có mục nào.</p>
+  <p class="list-grid">Chưa có mục nào.</p>
+  {{- end }}
   {{- end }}
 </div>
 {{ end }}

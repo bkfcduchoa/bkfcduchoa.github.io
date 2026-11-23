@@ -1,0 +1,10 @@
+{{- /* Author avatar from assets/media/authors/<avatar>, or the initial when there is none.
+  Context: dict "page" (author term page) "size" (CSS px). */ -}}
+{{- $size := .size | default 64 }}
+{{- with and .page.Params.avatar (resources.Get (printf "media/authors/%s" .page.Params.avatar)) }}
+{{- with .Fill (printf "%dx%d webp smart" (mul $size 2) (mul $size 2)) }}
+<img class="avatar" src="{{ .RelPermalink }}" width="{{ $size }}" height="{{ $size }}" alt="" loading="lazy">
+{{- end }}
+{{- else }}
+<span class="avatar avatar-initial" style="--size: {{ $size }}px" aria-hidden="true">{{ substr .page.LinkTitle 0 1 | upper }}</span>
+{{- end }}

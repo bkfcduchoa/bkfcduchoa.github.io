@@ -10,7 +10,8 @@
     {{- block "main" . }}{{ end }}
   </main>
   {{ partial "footer.html" . }}
-  {{- with resources.Get "js/menu.js" | minify | fingerprint }}
+  {{ partial "search.html" . }}
+  {{- with slice (resources.Get "js/menu.js") (resources.Get "js/search.js") | resources.Concat "js/site.js" | minify | fingerprint }}
   <script src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" defer></script>
   {{- end }}
 </body>

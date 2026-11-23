@@ -56,7 +56,7 @@ outputs:
 
 cascade:
   - target:
-      path: /post/**
+      path: "{/post/**,/event/**}"
       kind: page
     params:
       commentable: true

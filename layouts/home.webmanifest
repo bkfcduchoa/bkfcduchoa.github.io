@@ -1,4 +1,18 @@
-{{- $i := resources.Get "media/icon.png" -}}
-{{- $s := slice -}}
-{{- range slice 192 512 -}}{{- $r := $i.Fill (printf "%dx%d png" . .) -}}{{- $s = $s | append (dict "src" $r.RelPermalink "sizes" (printf "%dx%d" . .) "type" "image/png") -}}{{- end -}}
-{{- dict "name" site.Title "short_name" site.Title "lang" site.Language.LanguageCode "start_url" "/" "display" "standalone" "icons" $s | jsonify (dict "indent" "  ") -}}
+{{- /* Web app manifest, published at /manifest.webmanifest. Icons are made from assets/media/icon.png. */ -}}
+{{- $icon := resources.Get "media/icon.png" -}}
+{{- $icons := slice -}}
+{{- range slice 192 512 -}}
+{{- $r := $icon.Fill (printf "%dx%d png" . .) -}}
+{{- $icons = $icons | append (dict "src" $r.RelPermalink "sizes" (printf "%dx%d" . .) "type" "image/png") -}}
+{{- end -}}
+{{- dict
+  "name" site.Title
+  "short_name" site.Title
+  "description" site.Params.description
+  "lang" site.Language.LanguageCode
+  "start_url" "/"
+  "display" "standalone"
+  "theme_color" "#032b91"
+  "background_color" "#ffffff"
+  "icons" $icons
+  | jsonify (dict "indent" "  ") -}}

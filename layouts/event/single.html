@@ -1,0 +1,64 @@
+{{ define "main" }}
+{{- $p := .Params }}
+<article class="article">
+  <header class="article-head">
+    <p class="eyebrow"><a href="{{ (site.GetPage "/event").RelPermalink }}">{{ (site.GetPage "/event").Title }}</a></p>
+    <h1>{{ .Title }}</h1>
+    {{- with $p.links }}
+    <p class="social">
+      {{- range . }}
+      <a class="button button-outline" href="{{ .url }}" target="_blank" rel="noopener">{{ with .icon }}{{ partial "icon.html" (replace . "brands/" "") }}{{ end }}{{ .name }}</a>
+      {{- end }}
+    </p>
+    {{- end }}
+  </header>
+
+  {{- with .Resources.GetMatch "featured.*" }}
+  <figure class="featured">
+    {{- $img := .Resize (printf "%dx webp" (cond (lt .Width 1360) .Width 1360)) }}
+    <img src="{{ $img.RelPermalink }}" width="{{ $img.Width }}" height="{{ $img.Height }}" alt="{{ $p.event_name | default $.Title }}">
+    {{- with $p.image.caption }}<figcaption>{{ . | $.RenderString }}</figcaption>{{ end }}
+  </figure>
+  {{- end }}
+
+  <dl class="event-facts">
+    {{- with $p.event_start }}
+    {{- $start := time . }}
+    <div>
+      <dt>{{ partial "icon.html" "calendar" }}Thời gian</dt>
+      <dd>{{ partial "date.html" $start }}
+        {{- with $p.event_end }}{{ $end := time . }}{{ if ne ($end.Format "2006-01-02") ($start.Format "2006-01-02") }} – {{ partial "date.html" $end }}{{ end }}{{ end }}
+        {{- if $p.event_all_day }} (cả ngày){{ end }}</dd>
+    </div>
+    {{- end }}
+    {{- with $p.event_name }}
+    <div>
+      <dt>{{ partial "icon.html" "heart" }}Sự kiện</dt>
+      <dd>{{ with $p.event_url }}<a href="{{ . }}" target="_blank" rel="noopener">{{ end }}{{ . }}{{ with $p.event_url }}</a>{{ end }}</dd>
+    </div>
+    {{- end }}
+    {{- if or $p.location $p.address }}
+    <div>
+      <dt>{{ partial "icon.html" "pin" }}Địa điểm</dt>
+      <dd>
+        {{- with $p.location }}{{ . }}{{ end }}
+        {{- with $p.address }}
+        {{- $parts := slice }}
+        {{- range slice "street" "city" "region" "postcode" "country" }}{{ with index $p.address . }}{{ $parts = $parts | append (string .) }}{{ end }}{{ end }}
+        {{- with $parts }}<br>{{ delimit . ", " }}{{ end }}
+        {{- end }}
+      </dd>
+    </div>
+    {{- end }}
+  </dl>
+
+  <div class="prose">
+    {{ .Content }}
+  </div>
+  {{- if $p.commentable }}
+  <footer class="article-foot">
+    {{ partial "comments.html" . }}
+  </footer>
+  {{- end }}
+</article>
+{{ end }}

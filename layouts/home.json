@@ -1,5 +1,17 @@
+{{- /* Search index for the search dialog (assets/js/search.js), published at /index.json. */ -}}
 {{- $index := slice -}}
-{{- range site.RegularPages -}}
-{{- $index = $index | append (dict "title" .Title "permalink" .Permalink "summary" (.Summary | plainify) "tags" .Params.tags) -}}
+{{- range where site.RegularPages "Section" "in" (slice "post" "event") -}}
+{{- $authors := slice -}}
+{{- range .GetTerms "authors" }}{{ $authors = $authors | append .LinkTitle }}{{ end -}}
+{{- $index = $index | append (dict
+  "title" .Title
+  "url" .RelPermalink
+  "section" (cond (eq .Section "event") "Sự kiện" "Bài viết")
+  "date" (.Date.Format site.Params.dateFormat)
+  "summary" (.Summary | plainify | htmlUnescape | strings.TrimSpace)
+  "tags" (.Params.tags | default slice)
+  "authors" $authors
+  "content" (.Plain | htmlUnescape)
+) -}}
 {{- end -}}
 {{- $index | jsonify -}}
