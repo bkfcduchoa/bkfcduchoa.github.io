@@ -8,8 +8,6 @@ date: 2020-10-02T15:19:42.470Z
 lastmod: 2020-10-02T15:19:42.519Z
 featured: false
 draft: false
-image:
-  preview_only: false
 ---
 ```cpp
 #include <stdlib.h>
