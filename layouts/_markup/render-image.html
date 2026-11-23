@@ -8,6 +8,8 @@
   {{- end }}
 {{- end }}
 {{- if and $img (in (slice "jpeg" "png" "webp" "bmp" "tiff") $img.MediaType.SubType) }}
+{{- /* Keep the original at its old URL; pages show the resized copies. */}}
+{{- $img.Publish }}
 {{- partial "responsive-image.html" (dict "img" $img "alt" .PlainText "title" .Title) }}
 {{- else }}
 <img src="{{ with $img }}{{ .RelPermalink }}{{ else }}{{ .Destination }}{{ end }}" alt="{{ .PlainText }}"
