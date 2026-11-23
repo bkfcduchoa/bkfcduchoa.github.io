@@ -10,6 +10,8 @@
 {{- with .Params.bio }}{{ $desc = . }}{{ end }}
 <meta name="description" content="{{ $desc }}">
 <link rel="canonical" href="{{ .Permalink }}">
+{{- /* The first matching theme-color wins: dark first, then the default. */}}
+<meta name="theme-color" content="#08122f" media="(prefers-color-scheme: dark)">
 <meta name="theme-color" content="#032b91">
 <meta property="og:site_name" content="{{ site.Title }}">
 <meta property="og:title" content="{{ cond .IsHome site.Title $name }}">
@@ -61,8 +63,9 @@
   (resources.Get "css/chroma-dark.css")
   | resources.Concat "css/site.css" | minify | fingerprint }}
 <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
-{{- /* Render the content first so the passthrough hook can flag pages that use math. */}}
-{{- if .IsPage }}{{ $_ := .Content }}{{ end }}
+{{- /* Render the content first (Hugo caches it) so the passthrough hook can flag pages that use math. */}}
+{{- $_ := .Content }}
 {{- if .Store.Get "hasMath" }}
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16/dist/katex.min.css" crossorigin="anonymous">
 {{- end }}
