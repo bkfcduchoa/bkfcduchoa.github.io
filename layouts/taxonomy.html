@@ -1,7 +1,7 @@
 {{ define "main" }}
 <div class="wrap">
   <header class="page-head">
-    <h1>{{ .Title }}</h1>
+    <h1>{{ partial "page-title.html" . }}</h1>
   </header>
   {{- if eq .Data.Plural "authors" }}
   <ul class="card-grid list-grid">

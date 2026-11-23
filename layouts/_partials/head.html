@@ -1,7 +1,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-{{- $title := cond .IsHome site.Title (printf "%s | %s" .Title site.Title) }}
-<title>{{ $title }}</title>
+{{- $name := partial "page-title.html" . }}
+<title>{{ cond .IsHome site.Title (printf "%s | %s" $name site.Title) }}</title>
+{{- if eq .Kind "404" }}
+<meta name="robots" content="noindex">
+{{- end }}
 {{- $desc := site.Params.description }}
 {{- if and .IsPage .Summary }}{{ $desc = .Summary | plainify | htmlUnescape | strings.TrimSpace }}{{ end }}
 {{- with .Params.bio }}{{ $desc = . }}{{ end }}
@@ -9,7 +12,7 @@
 <link rel="canonical" href="{{ .Permalink }}">
 <meta name="theme-color" content="#032b91">
 <meta property="og:site_name" content="{{ site.Title }}">
-<meta property="og:title" content="{{ cond .IsHome site.Title .Title }}">
+<meta property="og:title" content="{{ cond .IsHome site.Title $name }}">
 <meta property="og:description" content="{{ $desc }}">
 <meta property="og:type" content="{{ cond .IsPage "article" "website" }}">
 <meta property="og:url" content="{{ .Permalink }}">

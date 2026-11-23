@@ -46,7 +46,9 @@
   {{- if not .Pages }}<p>Chưa có bài viết nào.</p>{{ end }}
   {{- else }}
   <header class="page-head">
-    <p class="eyebrow"><a href="{{ (site.GetPage .Data.Plural).RelPermalink }}">{{ (site.GetPage .Data.Plural).Title }}</a></p>
+    {{- with site.GetPage .Data.Plural }}
+    <p class="eyebrow"><a href="{{ .RelPermalink }}">{{ partial "page-title.html" . }}</a></p>
+    {{- end }}
     <h1>{{ .Title }}</h1>
   </header>
   {{- end }}
