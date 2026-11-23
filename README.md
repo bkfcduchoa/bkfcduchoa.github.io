@@ -27,7 +27,7 @@ three together.
   `.github/workflows/publish.yaml`.
 - **Netlify:** the site is also deployed on [Netlify](https://www.netlify.com), which builds
   `main` with `netlify.toml`. Thanks to Netlify for hosting it on their Open Source plan; the
-  footer credits Netlify on `*.netlify.app` hosts.
+  footer credits GitHub Pages and Netlify on every page.
 
 ## Where things are
 
