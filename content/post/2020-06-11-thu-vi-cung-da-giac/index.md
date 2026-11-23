@@ -1,6 +1,4 @@
 ---
-# Documentation: https://sourcethemes.com/academic/docs/managing-content/
-
 title: "Thú vị cùng đa giác"
 subtitle: ""
 summary: "Tìm hiểu một điều thú vị về đa giác nhé!"

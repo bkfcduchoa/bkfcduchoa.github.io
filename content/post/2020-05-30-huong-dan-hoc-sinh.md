@@ -1,6 +1,4 @@
 ---
-# Documentation: https://sourcethemes.com/academic/docs/managing-content/
-
 title: "Hướng dẫn"
 summary: "Hướng dẫn dành cho các bạn học sinh"
 authors: ["miti99"]
