@@ -1,0 +1,8 @@
+# Netlify build. Hugo is pinned to the version used for local builds (see README).
+[build]
+  command = "hugo --gc --minify"
+  publish = "public"
+
+[build.environment]
+  HUGO_VERSION = "0.154.5"
+  HUGO_EXTENDED = "true"
