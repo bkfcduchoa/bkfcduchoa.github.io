@@ -29,20 +29,6 @@ hero:
 
       Cùng ôn lại, giải thêm những bài tập [_Toán_](/tag/toan/), [_Lý_](/tag/ly/), [_Hóa_](/tag/hoa/),...
 
-welcome:
-  - title: 👋 Xin chào!
-    text: Rất vui vì bạn đã đến với site của chúng mình
-    button:
-      text: Liên hệ chúng mình tại đây nhé!
-      url: https://www.facebook.com/bkfcduchoalongan/
-      icon: facebook
-      newTab: true
-  - title: Bạn là học sinh cấp 3?
-    text: Xem hướng dẫn tại link sau nhé!
-    button:
-      text: Hướng dẫn tại đây
-      url: /post/2020-05-30-huong-dan-hoc-sinh/
-
 subjects:
   title: Từ khoá phổ biến
   # Tag names; each chip links to its /tag/<slug>/ page.

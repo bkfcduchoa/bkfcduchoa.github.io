@@ -30,24 +30,6 @@
 </section>
 {{- end }}
 
-{{- with $p.welcome }}
-<div class="wrap">
-  <div class="welcome">
-    {{- range . }}
-    <div class="welcome-card">
-      <h2>{{ .title }}</h2>
-      <p>{{ .text }}</p>
-      {{- with .button }}
-      <a class="button button-outline" href="{{ .url }}"{{ if .newTab }} target="_blank" rel="noopener"{{ end }}>
-        {{- with .icon }}{{ partial "icon.html" . }}{{ else }}{{ partial "icon.html" "link" }}{{ end }}{{ .text -}}
-      </a>
-      {{- end }}
-    </div>
-    {{- end }}
-  </div>
-</div>
-{{- end }}
-
 <section class="section" id="posts">
   <div class="wrap">
     <div class="section-head">
