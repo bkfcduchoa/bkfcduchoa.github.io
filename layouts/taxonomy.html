@@ -4,6 +4,8 @@
     <h1>{{ partial "page-title.html" . }}</h1>
   </header>
   {{- if eq .Data.Plural "authors" }}
+  {{- /* The cards use h3; this keeps the outline from jumping from h1. */}}
+  <h2 class="visually-hidden">Danh sách</h2>
   <ul class="card-grid list-grid">
     {{- range .Pages.ByTitle }}
     <li>

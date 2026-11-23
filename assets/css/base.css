@@ -177,8 +177,17 @@ blockquote {
 
 table {
   border-collapse: collapse;
-  display: block;
+}
+
+/* Wide tables scroll in their wrapper (layouts/_markup/render-table.html), so the
+   table itself keeps display: table and its semantics for screen readers. */
+.table-wrap {
   overflow-x: auto;
+  margin: 1em 0;
+}
+
+.table-wrap table {
+  margin: 0;
 }
 
 th,

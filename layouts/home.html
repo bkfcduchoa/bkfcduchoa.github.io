@@ -73,10 +73,10 @@
     <div id="gallery">
       <h2 class="section-title">{{ $p.gallery.title }}</h2>
       <ul class="gallery">
-        {{- range resources.Match (printf "%s/*" $p.gallery.album) }}
+        {{- range $i, $_ := resources.Match (printf "%s/*" $p.gallery.album) }}
         {{- $thumb := .Fill "640x480 webp smart" }}
         {{- $full := .Resize (printf "%dx webp" (cond (lt .Width 1600) .Width 1600)) }}
-        <li><a href="{{ $full.RelPermalink }}"><img src="{{ $thumb.RelPermalink }}" width="{{ $thumb.Width }}" height="{{ $thumb.Height }}" loading="lazy" alt="{{ $p.gallery.title }}: {{ path.BaseName .Name }}"></a></li>
+        <li><a href="{{ $full.RelPermalink }}" aria-label="Ảnh {{ add $i 1 }}, mở ảnh lớn"><img src="{{ $thumb.RelPermalink }}" width="{{ $thumb.Width }}" height="{{ $thumb.Height }}" loading="lazy" alt=""></a></li>
         {{- end }}
       </ul>
     </div>

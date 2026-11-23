@@ -4,6 +4,8 @@
     <h1>{{ .Title }}</h1>
     {{- with .Content }}<div class="prose">{{ . }}</div>{{ end }}
   </header>
+  {{- /* The cards use h3; this keeps the outline from jumping from h1. */}}
+  <h2 class="visually-hidden">Danh sách</h2>
   {{ partial "page-list.html" . }}
 </div>
 {{ end }}
