@@ -17,10 +17,23 @@
 <meta property="og:type" content="{{ cond .IsPage "article" "website" }}">
 <meta property="og:url" content="{{ .Permalink }}">
 <meta property="og:locale" content="vi_VN">
-{{- with resources.Get "media/logo.png" }}
-{{- with .Fill "512x512 png" }}
-<meta property="og:image" content="{{ .Permalink }}">
+{{- /* Share preview: the page's featured image when it has one, else the logo. */}}
+{{- $share := dict }}
+{{- with .Resources.GetMatch "featured.*" }}
+  {{- $share = dict "img" (.Fill "1200x630 jpg smart") "alt" ($.Params.event_name | default $.Title) "card" "summary_large_image" }}
+{{- else }}
+  {{- with resources.Get "media/logo.png" }}{{ $share = dict "img" (.Fill "512x512 png") "alt" site.Title "card" "summary" }}{{ end }}
 {{- end }}
+{{- with $share.img }}
+<meta property="og:image" content="{{ .Permalink }}">
+<meta property="og:image:width" content="{{ .Width }}">
+<meta property="og:image:height" content="{{ .Height }}">
+<meta property="og:image:alt" content="{{ $share.alt }}">
+<meta name="twitter:card" content="{{ $share.card }}">
+{{- end }}
+{{- if .IsPage }}
+<meta property="article:published_time" content="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">
+<meta property="article:modified_time" content="{{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" }}">
 {{- end }}
 {{- with resources.Get "media/icon.png" }}
 {{- with .Fill "32x32 png" }}
