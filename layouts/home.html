@@ -75,8 +75,7 @@
       <ul class="gallery">
         {{- range resources.Match (printf "%s/*" $p.gallery.album) }}
         {{- $thumb := .Fill "640x480 webp smart" }}
-        {{- $full := .Resize "1600x webp" }}
-        {{- if lt .Width 1600 }}{{ $full = .Resize (printf "%dx webp" .Width) }}{{ end }}
+        {{- $full := .Resize (printf "%dx webp" (cond (lt .Width 1600) .Width 1600)) }}
         <li><a href="{{ $full.RelPermalink }}"><img src="{{ $thumb.RelPermalink }}" width="{{ $thumb.Width }}" height="{{ $thumb.Height }}" loading="lazy" alt="{{ $p.gallery.title }}: {{ path.BaseName .Name }}"></a></li>
         {{- end }}
       </ul>

@@ -1,14 +1,17 @@
-{{- /* Images: a page resource first, then assets/media/<dest>, else the URL as written. */ -}}
+{{- /* Images: a page resource first, then assets/media/<dest>, else the URL as written.
+  Raster images get resized webp versions; GIF (may be animated) and SVG stay as they are. */ -}}
 {{- $u := urls.Parse .Destination }}
-{{- $src := .Destination }}
 {{- $img := "" }}
 {{- if not $u.IsAbs }}
   {{- with .PageInner.Resources.Get $u.Path }}{{ $img = . }}
   {{- else }}{{ with resources.Get (printf "media/%s" (strings.TrimPrefix "/" $u.Path)) }}{{ $img = . }}{{ end }}
   {{- end }}
 {{- end }}
-{{- with $img }}{{ $src = .RelPermalink }}{{ end }}
-<img src="{{ $src }}" alt="{{ .PlainText }}"
+{{- if and $img (in (slice "jpeg" "png" "webp" "bmp" "tiff") $img.MediaType.SubType) }}
+{{- partial "responsive-image.html" (dict "img" $img "alt" .PlainText "title" .Title) }}
+{{- else }}
+<img src="{{ with $img }}{{ .RelPermalink }}{{ else }}{{ .Destination }}{{ end }}" alt="{{ .PlainText }}"
   {{- with .Title }} title="{{ . }}"{{ end }}
-  {{- with $img }}{{ if ne .MediaType.SubType "svg" }} width="{{ .Width }}" height="{{ .Height }}"{{ end }}{{ end }} loading="lazy">
+  {{- with $img }}{{ if eq .ResourceType "image" }}{{ if ne .MediaType.SubType "svg" }} width="{{ .Width }}" height="{{ .Height }}"{{ end }}{{ end }}{{ end }} loading="lazy" decoding="async">
+{{- end }}
 {{- /**/ -}}

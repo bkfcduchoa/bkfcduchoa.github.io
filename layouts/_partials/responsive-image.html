@@ -1,0 +1,21 @@
+{{- /* Responsive <img> for a raster image resource, sized for the 632 px reading column.
+  Context: dict with "img" (resource), "alt", and optional "title" and "lazy" (default true).
+  Makes webp versions at 720 and 1360 px wide, never wider than the original. */ -}}
+{{- $img := .img }}
+{{- $hint := cond (eq $img.MediaType.SubType "png") "drawing" "picture" }}
+{{- $widths := slice }}
+{{- range slice 720 1360 }}{{ $widths = $widths | append (cond (lt $img.Width .) $img.Width .) }}{{ end }}
+{{- $srcset := slice }}
+{{- $small := "" }}
+{{- $large := "" }}
+{{- range $widths | uniq }}
+  {{- $r := $img.Resize (printf "%dx webp %s" . $hint) }}
+  {{- $srcset = $srcset | append (printf "%s %dw" $r.RelPermalink $r.Width) }}
+  {{- if not $small }}{{ $small = $r }}{{ end }}
+  {{- $large = $r }}
+{{- end }}
+<img src="{{ $small.RelPermalink }}"
+  {{- if gt (len $srcset) 1 }} srcset="{{ delimit $srcset ", " }}" sizes="(min-width: 44rem) 632px, 100vw"{{ end }}
+  {{- with .title }} title="{{ . }}"{{ end }} width="{{ $large.Width }}" height="{{ $large.Height }}" alt="{{ .alt }}"
+  {{- if ne .lazy false }} loading="lazy"{{ end }} decoding="async">
+{{- /**/ -}}

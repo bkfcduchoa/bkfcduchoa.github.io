@@ -15,8 +15,7 @@
 
   {{- with .Resources.GetMatch "featured.*" }}
   <figure class="featured">
-    {{- $img := .Resize (printf "%dx webp" (cond (lt .Width 1360) .Width 1360)) }}
-    <img src="{{ $img.RelPermalink }}" width="{{ $img.Width }}" height="{{ $img.Height }}" alt="{{ $p.event_name | default $.Title }}">
+    {{ partial "responsive-image.html" (dict "img" . "alt" ($p.event_name | default $.Title) "lazy" false) }}
     {{- with $p.image.caption }}<figcaption>{{ . | $.RenderString }}</figcaption>{{ end }}
   </figure>
   {{- end }}

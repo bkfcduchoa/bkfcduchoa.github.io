@@ -61,6 +61,12 @@ cascade:
       kind: page
     params:
       commentable: true
+  # Event pages show only resized copies of their images; skip publishing the originals.
+  - target:
+      path: "{/event/**}"
+      kind: page
+    build:
+      publishResources: false
 
 markup:
   highlight:
