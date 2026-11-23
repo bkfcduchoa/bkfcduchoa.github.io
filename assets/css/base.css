@@ -118,6 +118,16 @@ h3 {
   font-size: 1.25rem;
 }
 
+h4 {
+  font-size: 1.1rem;
+}
+
+/* Browser defaults shrink these below body text. */
+h5,
+h6 {
+  font-size: 1rem;
+}
+
 a {
   color: var(--link);
   text-underline-offset: 0.15em;
