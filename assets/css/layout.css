@@ -202,3 +202,7 @@ main:has(> .section-band:last-child) + .site-footer {
 .list-grid {
   margin-top: 1.5rem;
 }
+
+.footer-credit {
+  font-size: 0.85rem;
+}

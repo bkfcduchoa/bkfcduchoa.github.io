@@ -4,5 +4,6 @@
       {{- replace site.Params.copyright "{year}" (now.Format "2006") | safeHTML }}
       {{ with site.Params.license }}<a href="{{ .url }}" rel="license noopener noreferrer" target="_blank">{{ .name }}</a>{{ end -}}
     </p>
+    {{ partial "netlify-credit.html" . }}
   </div>
 </footer>
