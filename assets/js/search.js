@@ -28,6 +28,10 @@
         })
         .then(function (data) {
           items = (Array.isArray(data) ? data : []).map(function (d) {
+            // NFC keeps fold() length-preserving, so a match index in the folded text
+            // is also the index in the original text that snippet() slices.
+            d.content = String(d.content || '').normalize('NFC');
+            d.summary = String(d.summary || '').normalize('NFC');
             return {
               d: d,
               title: fold(d.title),
@@ -109,9 +113,17 @@
     render();
   }
 
+  // A click on the backdrop targets the dialog itself, but so does a click on its
+  // own scrollbar or padding; only a point outside the dialog's box is the backdrop.
+  function onBackdrop(e) {
+    if (e.target !== dialog) return false;
+    var r = dialog.getBoundingClientRect();
+    return e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom;
+  }
+
   document.addEventListener('click', function (e) {
     if (e.target.closest('[data-search-open]')) open();
-    else if (e.target.closest('[data-search-close]') || e.target === dialog) dialog.close();
+    else if (e.target.closest('[data-search-close]') || onBackdrop(e)) dialog.close();
   });
 
   document.addEventListener('keydown', function (e) {

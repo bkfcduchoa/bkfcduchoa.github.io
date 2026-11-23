@@ -1,8 +1,13 @@
 {{- /* Search index for the search dialog (assets/js/search.js), published at /index.json. */ -}}
 {{- $index := slice -}}
 {{- range where site.RegularPages "Section" "in" (slice "post" "event") -}}
-{{- /* Raw Markdown, so math stays as its TeX source instead of KaTeX's duplicated output. */ -}}
-{{- $text := .RawContent | replaceRE `\{\{[<%].*?[%>]\}\}` "" | replaceRE "(?m)^#+\\s*" "" | replaceRE "[*_`>]+" "" | htmlUnescape | replaceRE `\s+` " " | strings.TrimSpace -}}
+{{- /* Raw Markdown, so math stays as its TeX source instead of KaTeX's duplicated output.
+  Spoiler answers, other shortcodes and inline HTML tags are left out. */ -}}
+{{- $text := .RawContent
+  | replaceRE `(?s)\{\{<\s*spoiler.*?/spoiler\s*>\}\}` ""
+  | replaceRE `\{\{[<%].*?[%>]\}\}` ""
+  | replaceRE `</?[a-zA-Z][^<>]*>` ""
+  | replaceRE "(?m)^#+\\s*" "" | replaceRE "[*_`>]+" "" | htmlUnescape | replaceRE `\s+` " " | strings.TrimSpace -}}
 {{- $authors := slice -}}
 {{- range .GetTerms "authors" }}{{ $authors = $authors | append .LinkTitle }}{{ end -}}
 {{- $index = $index | append (dict

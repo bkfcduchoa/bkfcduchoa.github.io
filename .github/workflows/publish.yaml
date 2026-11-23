@@ -43,8 +43,8 @@ jobs:
           sudo dpkg -i "${RUNNER_TEMP}/${deb}"
           hugo version
 
-      # The runner's preinstalled Node runs this dependency-free test; nothing is installed.
-      - name: Test the Netlify footer credit
+      # The runner's preinstalled Node runs these dependency-free tests; nothing is installed.
+      - name: Test the site scripts
         run: node --test tests/*.test.js
 
       - name: Setup Pages
