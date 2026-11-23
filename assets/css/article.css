@@ -231,3 +231,42 @@
 .profile-about {
   max-width: var(--read);
 }
+
+/* Author box and related posts under an article */
+
+.author-box {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  margin-top: 2.5rem;
+  padding: 1.1rem 1.25rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--band);
+}
+
+.author-box .avatar {
+  width: 4rem;
+  height: 4rem;
+}
+
+.author-box p {
+  margin: 0.15rem 0;
+}
+
+.author-box-name {
+  font-weight: 700;
+}
+
+.author-box-name a {
+  text-decoration: none;
+}
+
+.related h2 {
+  font-size: 1.25rem;
+}
+
+/* The reading column is narrow: related cards stack. */
+.related .card-grid {
+  grid-template-columns: 1fr;
+}

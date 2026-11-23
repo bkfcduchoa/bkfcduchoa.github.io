@@ -11,12 +11,26 @@
     <p class="meta">
       {{ partial "authors.html" . }}
       <span>{{ partial "icon.html" "calendar" }}{{ partial "date.html" .Date }}</span>
+      {{- if gt (.Lastmod.Format "2006-01-02") (.Date.Format "2006-01-02") }}
+      <span>Cập nhật lần cuối {{ partial "date.html" .Lastmod }}</span>
+      {{- end }}
       <span>{{ partial "icon.html" "clock" }}{{ .ReadingTime }} phút đọc</span>
     </p>
   </header>
   <div class="prose">
     {{ .Content }}
   </div>
+  {{- range .GetTerms "authors" }}
+  {{ partial "author-box.html" . }}
+  {{- end }}
+  {{- with first 3 (site.RegularPages.Related .) }}
+  <aside class="related">
+    <h2>Bài đăng khác</h2>
+    <ul class="card-grid">
+      {{- range . }}<li>{{ partial "post-card.html" . }}</li>{{ end }}
+    </ul>
+  </aside>
+  {{- end }}
   {{- if .Params.commentable }}
   <footer class="article-foot">
     {{ partial "comments.html" . }}

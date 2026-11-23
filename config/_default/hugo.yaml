@@ -19,7 +19,8 @@ titleCaseStyle: firstupper
 
 pagination:
   pagerSize: 10
-  disableAliases: true
+  # Keep the /…/page/1/ redirects the old site published.
+  disableAliases: false
 
 # Every URL the site has always used.
 permalinks:

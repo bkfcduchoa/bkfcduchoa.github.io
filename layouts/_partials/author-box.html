@@ -1,0 +1,9 @@
+{{- /* Author box under a post. Context: author term page. */ -}}
+<aside class="author-box">
+  {{ partial "avatar.html" (dict "page" . "size" 64) }}
+  <div>
+    <p class="author-box-name"><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></p>
+    {{- with .Params.role }}<p class="meta">{{ . }}</p>{{ end }}
+    {{- with .Params.bio }}<p>{{ . }}</p>{{ end }}
+  </div>
+</aside>
