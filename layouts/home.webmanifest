@@ -1,0 +1,4 @@
+{{- $i := resources.Get "media/icon.png" -}}
+{{- $s := slice -}}
+{{- range slice 192 512 -}}{{- $r := $i.Fill (printf "%dx%d png" . .) -}}{{- $s = $s | append (dict "src" $r.RelPermalink "sizes" (printf "%dx%d" . .) "type" "image/png") -}}{{- end -}}
+{{- dict "name" site.Title "short_name" site.Title "lang" site.Language.LanguageCode "start_url" "/" "display" "standalone" "icons" $s | jsonify (dict "indent" "  ") -}}

@@ -1,0 +1,14 @@
+{{- /* Images: a page resource first, then assets/media/<dest>, else the URL as written. */ -}}
+{{- $u := urls.Parse .Destination }}
+{{- $src := .Destination }}
+{{- $img := "" }}
+{{- if not $u.IsAbs }}
+  {{- with .PageInner.Resources.Get $u.Path }}{{ $img = . }}
+  {{- else }}{{ with resources.Get (printf "media/%s" (strings.TrimPrefix "/" $u.Path)) }}{{ $img = . }}{{ end }}
+  {{- end }}
+{{- end }}
+{{- with $img }}{{ $src = .RelPermalink }}{{ end }}
+<img src="{{ $src }}" alt="{{ .PlainText }}"
+  {{- with .Title }} title="{{ . }}"{{ end }}
+  {{- with $img }}{{ if ne .MediaType.SubType "svg" }} width="{{ .Width }}" height="{{ .Height }}"{{ end }}{{ end }} loading="lazy">
+{{- /**/ -}}

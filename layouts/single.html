@@ -1,0 +1,26 @@
+{{ define "main" }}
+<article class="article">
+  <header class="article-head">
+    {{- with .GetTerms "tags" }}
+    <ul class="chips">
+      {{- range . }}<li><a class="chip" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></li>{{ end }}
+    </ul>
+    {{- end }}
+    <h1>{{ .Title }}</h1>
+    {{- with .Params.subtitle }}<p>{{ . }}</p>{{ end }}
+    <p class="meta">
+      {{ partial "authors.html" . }}
+      <span>{{ partial "icon.html" "calendar" }}{{ partial "date.html" .Date }}</span>
+      <span>{{ partial "icon.html" "clock" }}{{ .ReadingTime }} phút đọc</span>
+    </p>
+  </header>
+  <div class="prose">
+    {{ .Content }}
+  </div>
+  {{- if .Params.commentable }}
+  <footer class="article-foot">
+    {{ partial "comments.html" . }}
+  </footer>
+  {{- end }}
+</article>
+{{ end }}

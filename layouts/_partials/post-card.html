@@ -1,0 +1,18 @@
+{{- /* Post card for lists. Context: page. */ -}}
+<article class="card">
+  <h3><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h3>
+  <p class="meta">
+    <span>{{ partial "icon.html" "calendar" }}{{ partial "date.html" .Date }}</span>
+    {{ partial "authors.html" . }}
+  </p>
+  {{- with .Summary | plainify | htmlUnescape | strings.TrimSpace }}
+  <p class="card-summary">{{ . }}</p>
+  {{- end }}
+  {{- with .GetTerms "tags" }}
+  <ul class="chips">
+    {{- range . }}
+    <li><a class="chip" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></li>
+    {{- end }}
+  </ul>
+  {{- end }}
+</article>

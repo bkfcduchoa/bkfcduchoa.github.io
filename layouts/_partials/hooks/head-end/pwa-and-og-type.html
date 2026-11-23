@@ -1,6 +1,0 @@
-{{/* Head tags the old site had on every page that the Kit's head leaves out:
-     the web app manifest link, the browser theme colour and og:type
-     (article for blog posts, website for everything else). */}}
-{{ with site.Home.OutputFormats.Get "WebAppManifest" }}<link rel="manifest" href="{{ .RelPermalink }}" />{{ end }}
-<meta name="theme-color" content="{{ site.Params.hugoblox.theme.colors.primary | default "#1565c0" }}" />
-<meta property="og:type" content="{{ if and .IsPage (eq .Type "blog") }}article{{ else }}website{{ end }}" />

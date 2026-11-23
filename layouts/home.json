@@ -1,31 +1,5 @@
-{{- /* Site search index at /index.json, kept from the old theme so the URL and its
-       data stay available. The Kit's own search uses Pagefind instead. */ -}}
 {{- $index := slice -}}
 {{- range site.RegularPages -}}
-  {{- if and (not .Draft) (not .Params.private) (ne .Params.searchable false) .File -}}
-    {{- $desc := .Params.summary | default .Params.abstract | default .Summary -}}
-    {{- $authors := slice -}}
-    {{- range .Params.authors -}}
-      {{- $authors = $authors | append (partial "functions/get_author_profile" .).title -}}
-    {{- end -}}
-    {{- $index = $index | append (dict
-        "objectID" .File.UniqueID
-        "date" .Date.UTC.Unix
-        "publishdate" .PublishDate
-        "lastmod" .Lastmod.UTC.Unix
-        "expirydate" .ExpiryDate.UTC.Unix
-        "lang" .Language.Lang
-        "permalink" .Permalink
-        "relpermalink" .RelPermalink
-        "title" .Title
-        "summary" (plainify $desc | htmlUnescape)
-        "content" (.Plain | htmlUnescape | truncate 5000)
-        "authors" $authors
-        "kind" .Kind
-        "type" .Type
-        "section" .Section
-        "tags" .Params.tags
-        "categories" .Params.categories) -}}
-  {{- end -}}
+{{- $index = $index | append (dict "title" .Title "permalink" .Permalink "summary" (.Summary | plainify) "tags" .Params.tags) -}}
 {{- end -}}
 {{- $index | jsonify -}}

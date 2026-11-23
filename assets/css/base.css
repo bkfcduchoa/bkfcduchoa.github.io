@@ -1,0 +1,215 @@
+/* Design tokens: HCMUT palette. Sky blue is for accents, gradients and hover only,
+   never for body text on white (too little contrast). */
+:root {
+  --navy: #032b91;
+  --sky: #1488db;
+  --grey: #f7f5f6;
+
+  --bg: #ffffff;
+  --band: var(--grey);
+  --surface: #ffffff;
+  --text: #1c2333;
+  --muted: #5a6274;
+  --heading: var(--navy);
+  --link: var(--navy);
+  --link-hover: var(--sky);
+  --border: #e4e1e3;
+  --chip-bg: #e8eefb;
+  --chip-text: var(--navy);
+  --header-bg: var(--navy);
+  --header-text: #ffffff;
+  --button-bg: var(--navy);
+  --button-text: #ffffff;
+  --code-bg: #f3f1f2;
+  --shadow: 0 1px 2px rgb(3 43 145 / 6%), 0 4px 16px rgb(3 43 145 / 6%);
+  --hero: linear-gradient(135deg, var(--navy) 0%, var(--sky) 100%);
+
+  --font: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", Arial, sans-serif;
+  --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  --radius: 12px;
+  --radius-sm: 8px;
+  --wrap: 1120px;
+  --read: 680px;
+  --gap: clamp(1rem, 4vw, 1.5rem);
+
+  color-scheme: light;
+}
+
+[data-theme="dark"] {
+  --bg: #0b1020;
+  --band: #10172b;
+  --surface: #141c33;
+  --text: #e3e7f0;
+  --muted: #a0a8ba;
+  --heading: #dbe6ff;
+  --link: #5aa9ff;
+  --link-hover: #8cc4ff;
+  --border: #26304b;
+  --chip-bg: #1b2747;
+  --chip-text: #bcd6ff;
+  --header-bg: #08122f;
+  --button-bg: #2f6fe0;
+  --code-bg: #0f1628;
+  --shadow: 0 1px 2px rgb(0 0 0 / 30%), 0 4px 16px rgb(0 0 0 / 25%);
+  --hero: linear-gradient(135deg, #021d63 0%, #0f6db3 100%);
+
+  color-scheme: dark;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-padding-top: 4.5rem;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  overflow-wrap: break-word;
+}
+
+img,
+svg,
+video,
+iframe {
+  max-width: 100%;
+}
+
+img {
+  height: auto;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--heading);
+  line-height: 1.25;
+  margin: 1.6em 0 0.6em;
+}
+
+h1 {
+  font-size: clamp(1.75rem, 5vw, 2.4rem);
+}
+
+h2 {
+  font-size: clamp(1.4rem, 3.6vw, 1.8rem);
+}
+
+h3 {
+  font-size: 1.25rem;
+}
+
+a {
+  color: var(--link);
+  text-underline-offset: 0.15em;
+}
+
+a:hover {
+  color: var(--link-hover);
+}
+
+:focus-visible {
+  outline: 3px solid var(--sky);
+  outline-offset: 2px;
+}
+
+code,
+kbd,
+pre {
+  font-family: var(--mono);
+  font-size: 0.9em;
+}
+
+:not(pre) > code {
+  background: var(--code-bg);
+  border-radius: 4px;
+  padding: 0.1em 0.35em;
+}
+
+pre {
+  overflow-x: auto;
+  padding: 1rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  line-height: 1.5;
+}
+
+blockquote {
+  margin: 1.2em 0;
+  padding: 0.2em 1em;
+  border-left: 4px solid var(--sky);
+  color: var(--muted);
+}
+
+table {
+  border-collapse: collapse;
+  display: block;
+  overflow-x: auto;
+}
+
+th,
+td {
+  border: 1px solid var(--border);
+  padding: 0.4em 0.7em;
+}
+
+hr {
+  border: 0;
+  border-top: 1px solid var(--border);
+  margin: 2em 0;
+}
+
+.wrap {
+  width: 100%;
+  max-width: var(--wrap);
+  margin-inline: auto;
+  padding-inline: var(--gap);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.skip-link {
+  position: absolute;
+  left: 0.5rem;
+  top: -3rem;
+  z-index: 100;
+  background: var(--surface);
+  padding: 0.5rem 0.8rem;
+  border-radius: var(--radius-sm);
+}
+
+.skip-link:focus {
+  top: 0.5rem;
+}
+
+.icon {
+  width: 1.15em;
+  height: 1.15em;
+  flex: none;
+  vertical-align: -0.2em;
+}

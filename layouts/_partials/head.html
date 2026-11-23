@@ -1,0 +1,52 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+{{- $title := cond .IsHome site.Title (printf "%s | %s" .Title site.Title) }}
+<title>{{ $title }}</title>
+{{- $desc := site.Params.description }}
+{{- if and .IsPage .Summary }}{{ $desc = .Summary | plainify | htmlUnescape | strings.TrimSpace }}{{ end }}
+{{- with .Params.bio }}{{ $desc = . }}{{ end }}
+<meta name="description" content="{{ $desc }}">
+<link rel="canonical" href="{{ .Permalink }}">
+<meta name="theme-color" content="#032b91">
+<meta property="og:site_name" content="{{ site.Title }}">
+<meta property="og:title" content="{{ cond .IsHome site.Title .Title }}">
+<meta property="og:description" content="{{ $desc }}">
+<meta property="og:type" content="{{ cond .IsPage "article" "website" }}">
+<meta property="og:url" content="{{ .Permalink }}">
+<meta property="og:locale" content="vi_VN">
+{{- with resources.Get "media/logo.png" }}
+{{- with .Fill "512x512 png" }}
+<meta property="og:image" content="{{ .Permalink }}">
+{{- end }}
+{{- end }}
+{{- with resources.Get "media/icon.png" }}
+{{- with .Fill "32x32 png" }}
+<link rel="icon" type="image/png" href="{{ .RelPermalink }}" sizes="32x32">
+{{- end }}
+{{- with .Fill "180x180 png" }}
+<link rel="apple-touch-icon" href="{{ .RelPermalink }}">
+{{- end }}
+{{- end }}
+{{- with site.Home.OutputFormats.Get "WebAppManifest" }}
+<link rel="manifest" href="{{ .RelPermalink }}">
+{{- end }}
+{{- range .AlternativeOutputFormats }}
+<link rel="{{ .Rel }}" type="{{ .MediaType.Type }}" href="{{ .Permalink }}" title="{{ site.Title }}">
+{{- end }}
+{{- with resources.Get "js/theme.js" | minify }}
+<script>{{ .Content | safeJS }}</script>
+{{- end }}
+{{- $css := slice
+  (resources.Get "css/base.css")
+  (resources.Get "css/layout.css")
+  (resources.Get "css/components.css")
+  (resources.Get "css/article.css")
+  (resources.Get "css/chroma-light.css")
+  (resources.Get "css/chroma-dark.css")
+  | resources.Concat "css/site.css" | minify | fingerprint }}
+<link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
+{{- /* Render the content first so the passthrough hook can flag pages that use math. */}}
+{{- if .IsPage }}{{ $_ := .Content }}{{ end }}
+{{- if .Store.Get "hasMath" }}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16/dist/katex.min.css" crossorigin="anonymous">
+{{- end }}

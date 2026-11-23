@@ -1,0 +1,145 @@
+/* Single article: reading column, prose, spoilers, math, comments. */
+
+.article {
+  max-width: var(--read);
+  margin-inline: auto;
+  padding: 2rem var(--gap) 0;
+}
+
+.article-head {
+  margin-bottom: 1.75rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.article-head h1 {
+  margin: 0.6rem 0 0.75rem;
+}
+
+.article-head .meta {
+  font-size: 0.95rem;
+}
+
+.byline {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.byline img {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.prose > :first-child {
+  margin-top: 0;
+}
+
+.prose img {
+  display: block;
+  margin: 1.25rem auto;
+  border-radius: var(--radius-sm);
+}
+
+.prose ul,
+.prose ol {
+  padding-left: 1.4em;
+}
+
+.prose li + li {
+  margin-top: 0.25em;
+}
+
+.spoiler {
+  margin: 1.5rem 0;
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--sky);
+  border-radius: var(--radius-sm);
+  background: var(--band);
+}
+
+.spoiler > summary {
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--link);
+}
+
+.spoiler[open] > summary {
+  border-bottom: 1px solid var(--border);
+}
+
+.spoiler > :not(summary) {
+  margin-inline: 1rem;
+}
+
+.spoiler > :last-child {
+  margin-bottom: 1rem;
+}
+
+/* Block math scrolls on narrow screens instead of overflowing the column. */
+.katex-display {
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0.25rem 0;
+}
+
+.math-error {
+  color: #b42318;
+}
+
+.gdocs-embed {
+  position: relative;
+  aspect-ratio: 960 / 569;
+  margin: 1.5rem 0;
+}
+
+.gdocs-embed iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.article-foot {
+  margin-top: 2.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--border);
+}
+
+.comments {
+  margin-top: 2rem;
+}
+
+/* Author profile page */
+
+.profile {
+  display: grid;
+  gap: 1.25rem;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+@media (min-width: 40rem) {
+  .profile {
+    grid-template-columns: auto 1fr;
+  }
+}
+
+.profile img {
+  width: 7.5rem;
+  height: 7.5rem;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.profile h1 {
+  margin: 0 0 0.25rem;
+}
+
+.profile p {
+  margin: 0.2rem 0;
+}

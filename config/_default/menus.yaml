@@ -1,27 +1,17 @@
-# Navigation Links
-#   To link a homepage section, use `/#` followed by the section's `id` in `content/_index.md`.
-#   The weight parameter defines the order that the links will appear in.
-
-main: &main
-  - name: Trang chủ
-    url: /#hero
+# Header menu. Anchors point at the home page sections (ids in layouts/home.html).
+main:
+  - name: Bài viết
+    url: /post/
     weight: 10
+  - name: Sự kiện
+    url: /#events
+    weight: 20
+  - name: Ảnh
+    url: /#gallery
+    weight: 30
   - name: Giới thiệu
     url: /#about
-    weight: 20
-  - name: Bài viết
-    url: /#posts
-    weight: 30
-  - name: Thư viện ảnh
-    url: /#gallery
     weight: 40
-  - name: Thành viên
-    url: /#people
-    weight: 50
   - name: Liên hệ
     url: /#contact
-    weight: 60
-
-# Docs pages (the courses) open their own sidebar from the mobile menu button, and it lists the
-# `sidebar` menu after the course tree. Repeat the main menu there so it stays reachable on phones.
-sidebar: *main
+    weight: 50

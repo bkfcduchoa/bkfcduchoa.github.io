@@ -1,0 +1,13 @@
+{{- /* Context: pager. */ -}}
+{{- if gt .TotalPages 1 }}
+<nav aria-label="Phân trang">
+  <ul class="pagination">
+    {{- with .Prev }}<li><a href="{{ .URL }}" rel="prev" aria-label="Trang trước">‹</a></li>{{ end }}
+    {{- $cur := .PageNumber }}
+    {{- range .Pagers }}
+    <li>{{ if eq .PageNumber $cur }}<span aria-current="page">{{ .PageNumber }}</span>{{ else }}<a href="{{ .URL }}">{{ .PageNumber }}</a>{{ end }}</li>
+    {{- end }}
+    {{- with .Next }}<li><a href="{{ .URL }}" rel="next" aria-label="Trang sau">›</a></li>{{ end }}
+  </ul>
+</nav>
+{{- end }}

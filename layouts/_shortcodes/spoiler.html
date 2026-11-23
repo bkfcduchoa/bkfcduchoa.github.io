@@ -1,0 +1,2 @@
+{{- /* Collapsed answer. Usage: {{< spoiler text="Xem đáp án" >}}Markdown{{< /spoiler >}} */ -}}
+<details class="spoiler"><summary>{{ .Get "text" }}</summary>{{ .Inner | .Page.RenderString (dict "display" "block") }}</details>

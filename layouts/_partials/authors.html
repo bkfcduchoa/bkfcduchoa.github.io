@@ -1,0 +1,8 @@
+{{- /* Author names of a page, each linking to its /author/<slug>/ page. Context: page. */ -}}
+{{- with .GetTerms "authors" -}}
+<span class="byline">{{ partial "icon.html" "user" }}
+  {{- range $i, $a := . -}}
+  {{ if $i }}, {{ end }}<a href="{{ $a.RelPermalink }}">{{ $a.LinkTitle }}</a>
+  {{- end -}}
+</span>
+{{- end -}}

@@ -1,0 +1,18 @@
+{{- /* Event card. Context: event page. */ -}}
+<article class="card event-card">
+  {{- with .Resources.GetMatch "featured.*" }}
+  {{- with .Fill "960x540 webp smart" }}
+  <img src="{{ .RelPermalink }}" width="{{ .Width }}" height="{{ .Height }}" loading="lazy" alt="">
+  {{- end }}
+  {{- end }}
+  <div class="event-body">
+    <h3><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h3>
+    <p class="meta">
+      {{- with .Params.event_start }}<span>{{ partial "icon.html" "calendar" }}{{ partial "date.html" (time .) }}</span>{{ end }}
+      {{- with .Params.location }}<span>{{ partial "icon.html" "pin" }}{{ . }}</span>{{ end }}
+    </p>
+    {{- with .Summary | plainify | htmlUnescape | strings.TrimSpace }}
+    <p class="card-summary">{{ . }}</p>
+    {{- end }}
+  </div>
+</article>

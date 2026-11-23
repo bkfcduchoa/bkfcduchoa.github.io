@@ -1,7 +1,3 @@
-# Languages
-#   Create a section for each of your site's languages.
-#   Documentation: https://hugoblox.com/docs/
-
-# Default language
 vi:
-  locale: vi-vn
+  languageCode: vi
+  languageName: Tiếng Việt

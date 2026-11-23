@@ -1,135 +1,21 @@
-# ══════════════════════════════════════════════════════════════════════════════
-# HUGO BLOX CONFIGURATION
-# Schema: hugoblox.com/schema/v2
-# Documentation: https://hugoblox.com/docs/
-# ══════════════════════════════════════════════════════════════════════════════
-hugoblox:
-  schema: "2.0"
+# Site settings read by the templates in layouts/.
 
-  # ────────────────────────────────────────────────────────────────────────────
-  # IDENTITY
-  # ────────────────────────────────────────────────────────────────────────────
-  identity:
-    name: "BKFC Đức Hoà"
-    organization: "BKFC Đức Hoà"
-    type: organization # person | organization | local_business
-    tagline: ""
-    description: "BKFC - Tôi yêu Bách Khoa"
-    social:
-      twitter: ""
+description: "BKFC - Tôi yêu Bách Khoa"
 
-  # ────────────────────────────────────────────────────────────────────────────
-  # THEME
-  # `bkfc` is the site's own pack (data/themes/bkfc.yaml), in the HCMUT logo colours.
-  # Leave `colors` empty: a value there overrides the pack in both modes.
-  # ────────────────────────────────────────────────────────────────────────────
-  theme:
-    mode: system
-    pack: "bkfc"
-    colors:
-      primary: ""
-      secondary: ""
-      neutral: ""
+# Footer notice; {year} becomes the current year.
+copyright: "&copy; 2020 - {year} BKFC - THPT Đức Hòa. This work is licensed under"
+license:
+  name: CC BY NC ND 4.0
+  url: https://creativecommons.org/licenses/by-nc-nd/4.0
 
-  # ────────────────────────────────────────────────────────────────────────────
-  # TYPOGRAPHY (data/fonts/minimal.yaml: Montserrat, Roboto, Roboto Mono)
-  # ────────────────────────────────────────────────────────────────────────────
-  typography:
-    pack: "minimal"
+# Date shown on posts and events (Go layout).
+dateFormat: "02/01/2006"
 
-  # ────────────────────────────────────────────────────────────────────────────
-  # LAYOUT
-  # ────────────────────────────────────────────────────────────────────────────
-  layout:
-    radius: "md"
-    spacing: "comfortable"
-    avatar_shape: circle
-
-  # ────────────────────────────────────────────────────────────────────────────
-  # HEADER
-  # ────────────────────────────────────────────────────────────────────────────
-  header:
-    enable: true
-    style: navbar
-    sticky: true
-    align: left
-    search: true
-    theme_toggle: true
-    theme_picker: false
-    language_switcher: false
-    cta:
-      enable: false
-
-  # ────────────────────────────────────────────────────────────────────────────
-  # FOOTER
-  # ────────────────────────────────────────────────────────────────────────────
-  footer:
-    style: minimal
-    language_switcher: false
-    text: ""
-
-  # ────────────────────────────────────────────────────────────────────────────
-  # COPYRIGHT
-  # ────────────────────────────────────────────────────────────────────────────
-  copyright:
-    notice: "&copy; 2020 - {year} BKFC - THPT Đức Hòa. This work is licensed under {license}"
-    license:
-      type: cc
-      allow_derivatives: false
-      share_alike: true
-      allow_commercial: false
-
-  # ────────────────────────────────────────────────────────────────────────────
-  # CONTENT
-  # ────────────────────────────────────────────────────────────────────────────
-  content:
-    math:
-      enable: true
-    toc:
-      enable: true
-    reading_time:
-      enable: true
-
-  # ────────────────────────────────────────────────────────────────────────────
-  # SEARCH (Pagefind index, built after Hugo)
-  # ────────────────────────────────────────────────────────────────────────────
-  search:
-    enable: true
-
-  # ────────────────────────────────────────────────────────────────────────────
-  # COMMENTS
-  # ────────────────────────────────────────────────────────────────────────────
-  comments:
-    enable: true
-    provider: giscus
-    giscus:
-      repo: "bkfcduchoa/bkfcduchoa.github.io"
-      repo_id: "MDEwOlJlcG9zaXRvcnkzMDAzNTE2Mjg"
-      category: "Announcements"
-      category_id: "DIC_kwDOEecAjM4CfTNY"
-      theme: preferred_color_scheme
-      language_code: en
-      mapping: pathname
-
-  # ────────────────────────────────────────────────────────────────────────────
-  # REPOSITORY ("Edit this page" links)
-  # ────────────────────────────────────────────────────────────────────────────
-  repository:
-    enable: true
-    url: "https://github.com/bkfcduchoa/bkfcduchoa.github.io"
-    branch: main
-    content_dir: content
-
-  # ────────────────────────────────────────────────────────────────────────────
-  # LOCALE
-  # ────────────────────────────────────────────────────────────────────────────
-  locale:
-    date_format: "Jan 2, 2006"
-    time_format: "3:04 PM"
-    address_format: en-us
-
-  # ────────────────────────────────────────────────────────────────────────────
-  # SECURITY (allow framing for the slides speaker-notes window)
-  # ────────────────────────────────────────────────────────────────────────────
-  security:
-    frame_options: allow
+# giscus comments on posts.
+giscus:
+  repo: "bkfcduchoa/bkfcduchoa.github.io"
+  repoId: "MDEwOlJlcG9zaXRvcnkzMDAzNTE2Mjg"
+  category: "Announcements"
+  categoryId: "DIC_kwDOEecAjM4CfTNY"
+  mapping: pathname
+  lang: en

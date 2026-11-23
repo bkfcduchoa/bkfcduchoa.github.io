@@ -1,0 +1,2 @@
+{{- /* Context: time.Time. Prints the site's date format inside <time>. */ -}}
+<time datetime="{{ .Format "2006-01-02" }}">{{ .Format site.Params.dateFormat }}</time>

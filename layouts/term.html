@@ -1,0 +1,30 @@
+{{ define "main" }}
+<div class="wrap">
+  {{- if eq .Data.Plural "authors" }}
+  <header class="page-head profile">
+    {{- with .Params.avatar }}{{ with resources.Get (printf "media/authors/%s" .) }}{{ with .Fill "240x240 webp smart" }}
+    <img src="{{ .RelPermalink }}" width="120" height="120" alt="">
+    {{- end }}{{ end }}{{ end }}
+    <div>
+      <h1>{{ .Title }}</h1>
+      {{- with .Params.role }}<p><strong>{{ . }}</strong></p>{{ end }}
+      {{- range .Params.affiliations }}<p>{{ with .url }}<a href="{{ . }}" target="_blank" rel="noopener">{{ end }}{{ .name }}{{ with .url }}</a>{{ end }}</p>{{ end }}
+      {{- with .Params.bio }}<p>{{ . }}</p>{{ end }}
+      {{- with .Params.links }}
+      <p class="social">
+        {{- range . }}<a class="button button-outline" href="{{ .url }}"{{ if strings.HasPrefix .url "http" }} target="_blank" rel="noopener"{{ end }}>{{ with .icon }}{{ partial "icon.html" . }}{{ end }}{{ .name }}</a>{{ end }}
+      </p>
+      {{- end }}
+    </div>
+  </header>
+  {{- with .Content }}<details class="about spoiler"><summary>Giới thiệu</summary><div class="prose">{{ . }}</div></details>{{ end }}
+  {{- with .Pages }}<h2>Bài viết</h2>{{ end }}
+  {{- else }}
+  <header class="page-head">
+    <p>{{ (site.GetPage .Data.Plural).Title }}</p>
+    <h1>{{ .Title }}</h1>
+  </header>
+  {{- end }}
+  {{ partial "page-list.html" . }}
+</div>
+{{ end }}

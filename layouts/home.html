@@ -1,0 +1,146 @@
+{{ define "main" }}
+{{- $p := .Params }}
+
+{{- with $p.hero }}
+<section class="hero on-dark" id="hero">
+  <div class="wrap">
+    <div>
+      <h1>{{ .title }}</h1>
+      <div class="hero-tagline">{{ .text | $.RenderString }}</div>
+      <div class="hero-actions">
+        {{- range .actions }}
+        <a class="button{{ if ne .style "primary" }} button-outline{{ end }}" href="{{ .url }}"{{ if strings.HasPrefix .url "http" }} target="_blank" rel="noopener"{{ end }}>
+          {{- with .icon }}{{ partial "icon.html" . }}{{ end }}{{ .text -}}
+        </a>
+        {{- end }}
+      </div>
+      {{- with .note }}
+      <p class="hero-note">{{ partial "icon.html" "clock" }}{{ . }}</p>
+      {{- end }}
+      {{- with .details }}
+      <div class="hero-details">{{ . | $.RenderString (dict "display" "block") }}</div>
+      {{- end }}
+    </div>
+    {{- with resources.Get (printf "media/%s" .image) }}
+    {{- with .Resize "560x webp" }}
+    <img class="hero-logo" src="{{ .RelPermalink }}" width="{{ .Width }}" height="{{ .Height }}" alt="{{ $p.hero.imageAlt }}">
+    {{- end }}
+    {{- end }}
+  </div>
+</section>
+{{- end }}
+
+{{- with $p.welcome }}
+<div class="wrap">
+  <div class="welcome">
+    {{- range . }}
+    <div class="welcome-card">
+      <h2>{{ .title }}</h2>
+      <p>{{ .text }}</p>
+      {{- with .button }}
+      <a class="button button-outline" href="{{ .url }}"{{ if .newTab }} target="_blank" rel="noopener"{{ end }}>
+        {{- with .icon }}{{ partial "icon.html" . }}{{ else }}{{ partial "icon.html" "link" }}{{ end }}{{ .text -}}
+      </a>
+      {{- end }}
+    </div>
+    {{- end }}
+  </div>
+</div>
+{{- end }}
+
+<section class="section" id="posts">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 class="section-title">{{ $p.posts.title }}</h2>
+      <a class="more-link" href="{{ (site.GetPage "/post").RelPermalink }}">Xem tất cả bài viết →</a>
+    </div>
+    {{- with $p.subjects }}
+    <div class="subjects" id="tags">
+      <p class="subjects-label">{{ .title }}</p>
+      <ul class="chips">
+        {{- range .tags }}
+        {{- with site.GetPage (printf "/tags/%s" .) }}
+        <li><a class="chip chip-lg" href="{{ .RelPermalink }}">{{ .LinkTitle }} <span class="chip-count">{{ len .Pages }}</span></a></li>
+        {{- else }}
+        {{- errorf "home: subject tag %q has no posts" . }}
+        {{- end }}
+        {{- end }}
+      </ul>
+      {{- with .allText }}<div class="subjects-all">{{ . | $.RenderString }}</div>{{ end }}
+    </div>
+    {{- end }}
+    <ul class="card-grid">
+      {{- range first ($p.posts.count | default 6) (where site.RegularPages "Section" "post") }}
+      <li>{{ partial "post-card.html" . }}</li>
+      {{- end }}
+    </ul>
+  </div>
+</section>
+
+<section class="section section-band">
+  <div class="wrap split">
+    <div id="events">
+      <div class="section-head">
+        <h2 class="section-title">{{ $p.events.title }}</h2>
+        <a class="more-link" href="{{ (site.GetPage "/event").RelPermalink }}">Tất cả sự kiện →</a>
+      </div>
+      {{- range first ($p.events.count | default 1) (where site.RegularPages "Section" "event") }}
+      {{ partial "event-card.html" . }}
+      {{- end }}
+    </div>
+    <div id="gallery">
+      <h2 class="section-title">{{ $p.gallery.title }}</h2>
+      <ul class="gallery">
+        {{- range resources.Match (printf "%s/*" $p.gallery.album) }}
+        {{- $thumb := .Fill "640x480 webp smart" }}
+        {{- $full := .Resize "1600x webp" }}
+        {{- if lt .Width 1600 }}{{ $full = .Resize (printf "%dx webp" .Width) }}{{ end }}
+        <li><a href="{{ $full.RelPermalink }}"><img src="{{ $thumb.RelPermalink }}" width="{{ $thumb.Width }}" height="{{ $thumb.Height }}" loading="lazy" alt="{{ $p.gallery.title }}: {{ path.BaseName .Name }}"></a></li>
+        {{- end }}
+      </ul>
+    </div>
+  </div>
+</section>
+
+{{- with $p.about }}
+<section class="section" id="about">
+  <div class="wrap">
+    <h2 class="section-title">{{ .title }}</h2>
+    {{- /* The first line stays visible; the rest opens on demand. */}}
+    {{- $parts := split .text "  \n" }}
+    <details class="about">
+      <summary>{{ index $parts 0 | $.RenderString (dict "display" "block") }}<span class="about-more">Đọc thêm</span></summary>
+      <div class="about-rest">{{ delimit (after 1 $parts) "  \n" | $.RenderString (dict "display" "block") }}</div>
+    </details>
+  </div>
+</section>
+{{- end }}
+
+{{- with $p.contact }}
+<section class="section section-band" id="contact">
+  <div class="wrap">
+    <h2 class="section-title">{{ .title }}</h2>
+    <p class="contact-intro">{{ .text }}</p>
+    <div class="contact-grid">
+      <div class="card">
+        <h3>{{ partial "icon.html" "pin" }}{{ .addressTitle }}</h3>
+        <p>{{ delimit .address "<br>" | safeHTML }}</p>
+        <p><a href="{{ .mapUrl }}" target="_blank" rel="noopener">{{ .mapText }}</a></p>
+      </div>
+      <div class="card">
+        <h3>{{ partial "icon.html" "clock" }}{{ .hoursTitle }}</h3>
+        {{- range .hours }}<p>{{ . }}</p>{{ end }}
+      </div>
+      <div class="card">
+        <h3>{{ partial "icon.html" "chat" }}{{ .socialTitle }}</h3>
+        <div class="social">
+          {{- range .social }}
+          <a class="button" href="{{ .url }}" target="_blank" rel="noopener">{{ partial "icon.html" .icon }}{{ .name }}</a>
+          {{- end }}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{{- end }}
+{{ end }}

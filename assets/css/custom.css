@@ -1,7 +1,0 @@
-/* The docs sidebar repeats the main menu (menus.yaml `sidebar`) so it is reachable from the
-   mobile menu on course pages. On wide screens the navbar already shows it, so hide the copy. */
-@media (min-width: 1024px) {
-  .hb-sidebar-container li:has(> a[href^="/#"]) {
-    display: none;
-  }
-}

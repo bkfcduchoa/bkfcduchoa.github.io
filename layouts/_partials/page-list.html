@@ -1,0 +1,8 @@
+{{- /* Paginated cards of a list page's pages. Context: list page. */ -}}
+{{- $pager := .Paginate .Pages }}
+<ul class="card-grid list-grid">
+  {{- range $pager.Pages }}
+  <li>{{ if eq .Section "event" }}{{ partial "event-card.html" . }}{{ else }}{{ partial "post-card.html" . }}{{ end }}</li>
+  {{- end }}
+</ul>
+{{ partial "pagination.html" $pager }}

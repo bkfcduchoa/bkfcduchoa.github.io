@@ -1,0 +1,9 @@
+{{ define "main" }}
+<div class="wrap">
+  <header class="page-head">
+    <h1>{{ .Title }}</h1>
+    {{- with .Content }}<div class="prose">{{ . }}</div>{{ end }}
+  </header>
+  {{ partial "page-list.html" . }}
+</div>
+{{ end }}

@@ -1,0 +1,9 @@
+{{- /* Link styled as a button.
+  Usage: {{< button url="/post/x/" text="Label" icon="link" new_tab="true" >}}
+  icon: an icon name from _partials/icon.html; a "brands/" prefix is accepted. */ -}}
+{{- $url := .Get "url" | default "#" }}
+{{- $icon := replace (.Get "icon" | default "") "brands/" "" }}
+{{- $newTab := eq (printf "%v" (.Get "new_tab")) "true" }}
+<p><a class="button" href="{{ $url }}"{{ if $newTab }} target="_blank" rel="noopener"{{ end }}>
+  {{- with $icon }}{{ partial "icon.html" . }}{{ end }}{{ .Get "text" -}}
+</a></p>
