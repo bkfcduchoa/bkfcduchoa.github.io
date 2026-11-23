@@ -390,28 +390,35 @@ a.chip:hover {
 }
 
 .about summary {
+  display: inline-block;
+  margin-bottom: 0.5rem;
   list-style: none;
   cursor: pointer;
+  color: var(--link);
+  font-weight: 600;
 }
 
 .about summary::-webkit-details-marker {
   display: none;
 }
 
-.about summary p {
+.about > p {
   margin: 0 0 0.5rem;
 }
 
-.about-more {
-  color: var(--link);
-  font-weight: 600;
-}
-
+/* The arrows are decoration: empty alt text keeps them out of the button name. */
 .about-more::after {
   content: " ▾";
+  content: " ▾" / "";
 }
 
-.about[open] .about-more {
+.about-less::after {
+  content: " ▴";
+  content: " ▴" / "";
+}
+
+.about details[open] .about-more,
+.about details:not([open]) .about-less {
   display: none;
 }
 
