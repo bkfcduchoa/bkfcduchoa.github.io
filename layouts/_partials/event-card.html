@@ -11,7 +11,7 @@
       {{- with .Params.event_start }}<span>{{ partial "icon.html" "calendar" }}{{ partial "date.html" (time .) }}</span>{{ end }}
       {{- with .Params.location }}<span>{{ partial "icon.html" "pin" }}{{ . }}</span>{{ end }}
     </p>
-    {{- with .Summary | plainify | htmlUnescape | strings.TrimSpace }}
+    {{- with partial "summary.html" . }}
     <p class="card-summary">{{ . }}</p>
     {{- end }}
   </div>

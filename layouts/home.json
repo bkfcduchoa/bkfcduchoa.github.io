@@ -10,7 +10,7 @@
   "url" .RelPermalink
   "section" (cond (eq .Section "event") "Sự kiện" "Bài viết")
   "date" (.Date.Format site.Params.dateFormat)
-  "summary" (.Summary | plainify | htmlUnescape | strings.TrimSpace)
+  "summary" (partial "summary.html" .)
   "tags" (.Params.tags | default slice)
   "authors" $authors
   "content" $text

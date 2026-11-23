@@ -1,0 +1,2 @@
+{{- /* Plain-text summary for cards, meta descriptions and search, without code blocks. Context: page. Returns a string. */ -}}
+{{- return (.Summary | replaceRE `(?s)<pre.*?</pre>` "" | plainify | htmlUnescape | replaceRE `\s+` " " | strings.TrimSpace) }}

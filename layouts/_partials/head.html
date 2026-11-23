@@ -6,7 +6,7 @@
 <meta name="robots" content="noindex">
 {{- end }}
 {{- $desc := site.Params.description }}
-{{- if and .IsPage .Summary }}{{ $desc = .Summary | plainify | htmlUnescape | strings.TrimSpace }}{{ end }}
+{{- if .IsPage }}{{ with partial "summary.html" . }}{{ $desc = . }}{{ end }}{{ end }}
 {{- with .Params.bio }}{{ $desc = . }}{{ end }}
 <meta name="description" content="{{ $desc }}">
 <link rel="canonical" href="{{ .Permalink }}">

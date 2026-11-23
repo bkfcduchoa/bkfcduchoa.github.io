@@ -5,7 +5,7 @@
     <span>{{ partial "icon.html" "calendar" }}{{ partial "date.html" .Date }}</span>
     {{ partial "authors.html" . }}
   </p>
-  {{- with .Summary | plainify | htmlUnescape | strings.TrimSpace }}
+  {{- with partial "summary.html" . }}
   <p class="card-summary">{{ . }}</p>
   {{- end }}
   {{- with .GetTerms "tags" }}
