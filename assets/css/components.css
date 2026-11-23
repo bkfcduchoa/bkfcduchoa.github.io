@@ -21,8 +21,8 @@
 }
 
 .button:hover {
-  background: var(--sky);
-  border-color: var(--sky);
+  background: var(--sky-strong);
+  border-color: var(--sky-strong);
   color: #fff;
 }
 
@@ -73,7 +73,7 @@
 }
 
 a.chip:hover {
-  background: var(--sky);
+  background: var(--sky-strong);
   color: #fff;
 }
 
@@ -492,6 +492,10 @@ a.chip:hover {
   font: inherit;
   font-size: 1.05rem;
   outline: none;
+}
+
+.search-form:focus-within {
+  box-shadow: inset 0 -2px 0 var(--sky);
 }
 
 .search-status {

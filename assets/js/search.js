@@ -116,7 +116,7 @@
 
   document.addEventListener('keydown', function (e) {
     var typing = /^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName) || e.target.isContentEditable;
-    if ((e.key === '/' && !typing) || (e.key.toLowerCase() === 'k' && (e.ctrlKey || e.metaKey))) {
+    if ((e.key === '/' && !typing) || ((e.key || '').toLowerCase() === 'k' && (e.ctrlKey || e.metaKey))) {
       e.preventDefault();
       open();
     }

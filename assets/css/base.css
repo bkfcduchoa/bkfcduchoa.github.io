@@ -3,6 +3,7 @@
 :root {
   --navy: #032b91;
   --sky: #1488db;
+  --sky-strong: #0f6db3; /* sky darkened to pass AA with white text */
   --grey: #f7f5f6;
 
   --bg: #ffffff;
@@ -12,7 +13,7 @@
   --muted: #5a6274;
   --heading: var(--navy);
   --link: var(--navy);
-  --link-hover: var(--sky);
+  --link-hover: var(--sky-strong);
   --border: #e4e1e3;
   --chip-bg: #e8eefb;
   --chip-text: var(--navy);

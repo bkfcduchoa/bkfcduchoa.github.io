@@ -91,7 +91,7 @@
     {{- /* The first line stays visible; the rest opens on demand. */}}
     {{- $parts := split .text "  \n" }}
     <details class="about">
-      <summary>{{ index $parts 0 | $.RenderString (dict "display" "block") }}<span class="about-more">Đọc thêm</span></summary>
+      <summary>{{ index $parts 0 | $.RenderString }}<span class="about-more">Đọc thêm</span></summary>
       <div class="about-rest">{{ delimit (after 1 $parts) "  \n" | $.RenderString (dict "display" "block") }}</div>
     </details>
   </div>
