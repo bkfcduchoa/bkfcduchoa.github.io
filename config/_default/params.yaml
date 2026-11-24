@@ -8,6 +8,11 @@ license:
   name: CC BY NC ND 4.0
   url: https://creativecommons.org/licenses/by-nc-nd/4.0
 
+# Footer "Made by" credit.
+creator:
+  name: miti99
+  url: https://miti99.com
+
 # Date shown on posts and events (Go layout).
 dateFormat: "02/01/2006"
 

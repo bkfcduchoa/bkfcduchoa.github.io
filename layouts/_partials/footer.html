@@ -4,6 +4,9 @@
       {{- replace site.Params.copyright "{year}" (now.Format "2006") | safeHTML }}
       {{ with site.Params.license }}<a href="{{ .url }}" rel="license noopener noreferrer" target="_blank">{{ .name }}</a>{{ end -}}
     </p>
+    {{- with site.Params.creator }}
+    <p class="footer-credit">Made by <a href="{{ .url }}" target="_blank" rel="noopener">{{ .name }}</a> with ❤️</p>
+    {{- end }}
     {{ partial "netlify-credit.html" . }}
   </div>
 </footer>
