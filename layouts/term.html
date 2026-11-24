@@ -46,13 +46,9 @@
   {{- if not .Pages }}<p>Chưa có bài viết nào.</p>{{ end }}
   {{- else }}
   <header class="page-head">
-    {{- with site.GetPage .Data.Plural }}
-    <p class="eyebrow"><a href="{{ .RelPermalink }}">{{ partial "page-title.html" . }}</a></p>
-    {{- end }}
+    <p class="eyebrow"><a href="{{ (site.GetPage .Data.Plural).RelPermalink }}">{{ (site.GetPage .Data.Plural).Title }}</a></p>
     <h1>{{ .Title }}</h1>
   </header>
-  {{- /* The cards use h3; this keeps the outline from jumping from h1. */}}
-  <h2 class="visually-hidden">Danh sách</h2>
   {{- end }}
   {{ partial "page-list.html" . }}
 </div>

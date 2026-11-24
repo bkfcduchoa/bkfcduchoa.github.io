@@ -1,8 +1,0 @@
-{{- /* Title of a page, in Vietnamese for the pages Hugo names itself. Context: page. Returns a string. */ -}}
-{{- $title := .Title }}
-{{- if eq .Kind "taxonomy" }}
-  {{- with index (dict "tags" "Từ khoá" "categories" "Chuyên mục" "publication_types" "Loại bài") .Data.Plural }}{{ $title = . }}{{ end }}
-{{- else if eq .Kind "404" }}
-  {{- $title = "Trang không tìm thấy" }}
-{{- end }}
-{{- return $title }}

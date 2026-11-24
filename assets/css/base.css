@@ -23,7 +23,7 @@
   --button-text: #ffffff;
   --code-bg: #f3f1f2;
   --shadow: 0 1px 2px rgb(3 43 145 / 6%), 0 4px 16px rgb(3 43 145 / 6%);
-  --hero: linear-gradient(135deg, var(--navy) 0%, var(--sky-strong) 100%); /* white text stays AA to the corner */
+  --hero: linear-gradient(135deg, var(--navy) 0%, var(--sky) 100%);
 
   --font: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", Arial, sans-serif;
   --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
@@ -118,16 +118,6 @@ h3 {
   font-size: 1.25rem;
 }
 
-h4 {
-  font-size: 1.1rem;
-}
-
-/* Browser defaults shrink these below body text. */
-h5,
-h6 {
-  font-size: 1rem;
-}
-
 a {
   color: var(--link);
   text-underline-offset: 0.15em;
@@ -140,11 +130,6 @@ a:hover {
 :focus-visible {
   outline: 3px solid var(--sky);
   outline-offset: 2px;
-}
-
-/* Sky blends into the hero gradient; white keeps the ring visible there. */
-.on-dark :focus-visible {
-  outline-color: #fff;
 }
 
 code,
@@ -177,17 +162,8 @@ blockquote {
 
 table {
   border-collapse: collapse;
-}
-
-/* Wide tables scroll in their wrapper (layouts/_markup/render-table.html), so the
-   table itself keeps display: table and its semantics for screen readers. */
-.table-wrap {
+  display: block;
   overflow-x: auto;
-  margin: 1em 0;
-}
-
-.table-wrap table {
-  margin: 0;
 }
 
 th,

@@ -73,10 +73,11 @@
     <div id="gallery">
       <h2 class="section-title">{{ $p.gallery.title }}</h2>
       <ul class="gallery">
-        {{- range $i, $_ := resources.Match (printf "%s/*" $p.gallery.album) }}
+        {{- range resources.Match (printf "%s/*" $p.gallery.album) }}
         {{- $thumb := .Fill "640x480 webp smart" }}
-        {{- $full := .Resize (printf "%dx webp" (cond (lt .Width 1600) .Width 1600)) }}
-        <li><a href="{{ $full.RelPermalink }}" aria-label="Ảnh {{ add $i 1 }}, mở ảnh lớn"><img src="{{ $thumb.RelPermalink }}" width="{{ $thumb.Width }}" height="{{ $thumb.Height }}" loading="lazy" alt=""></a></li>
+        {{- $full := .Resize "1600x webp" }}
+        {{- if lt .Width 1600 }}{{ $full = .Resize (printf "%dx webp" .Width) }}{{ end }}
+        <li><a href="{{ $full.RelPermalink }}"><img src="{{ $thumb.RelPermalink }}" width="{{ $thumb.Width }}" height="{{ $thumb.Height }}" loading="lazy" alt="{{ $p.gallery.title }}: {{ path.BaseName .Name }}"></a></li>
         {{- end }}
       </ul>
     </div>
@@ -89,13 +90,10 @@
     <h2 class="section-title">{{ .title }}</h2>
     {{- /* The first line stays visible; the rest opens on demand. */}}
     {{- $parts := split .text "  \n" }}
-    <div class="about">
-      <p>{{ index $parts 0 | $.RenderString }}</p>
-      <details>
-        <summary><span class="about-more">Đọc thêm</span><span class="about-less">Thu gọn</span></summary>
-        <div class="about-rest">{{ delimit (after 1 $parts) "  \n" | $.RenderString (dict "display" "block") }}</div>
-      </details>
-    </div>
+    <details class="about">
+      <summary>{{ index $parts 0 | $.RenderString }}<span class="about-more">Đọc thêm</span></summary>
+      <div class="about-rest">{{ delimit (after 1 $parts) "  \n" | $.RenderString (dict "display" "block") }}</div>
+    </details>
   </div>
 </section>
 {{- end }}

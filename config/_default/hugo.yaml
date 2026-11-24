@@ -61,12 +61,6 @@ cascade:
       kind: page
     params:
       commentable: true
-  # An empty taxonomy kept only so its old URL still answers.
-  - target:
-      path: "/publication_types"
-      kind: taxonomy
-    sitemap:
-      disable: true
 
 markup:
   highlight:

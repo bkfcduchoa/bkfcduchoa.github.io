@@ -11,7 +11,7 @@ Needs Hugo extended **0.154.5**.
 ```sh
 hugo server                  # preview at http://localhost:1313/
 hugo --gc --minify           # build into public/
-node --test tests/*.test.js  # script tests (any recent Node, no packages)
+node --test tests/*.test.js  # footer credit test (any recent Node, no packages)
 ```
 
 ## Hugo version

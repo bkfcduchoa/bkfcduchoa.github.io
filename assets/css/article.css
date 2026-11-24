@@ -90,10 +90,6 @@
   color: #b42318;
 }
 
-[data-theme="dark"] .math-error {
-  color: #ff8a80;
-}
-
 .gdocs-embed {
   position: relative;
   aspect-ratio: 960 / 569;

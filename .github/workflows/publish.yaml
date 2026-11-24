@@ -7,9 +7,10 @@ on:
     branches: [main]
   workflow_dispatch:
 
-# Least privilege: only the deploy job can write to Pages.
 permissions:
   contents: read
+  pages: write
+  id-token: write
 
 concurrency:
   group: pages-${{ github.event_name == 'pull_request' && github.head_ref || 'deploy' }}
@@ -27,10 +28,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
     timeout-minutes: 10
-    permissions:
-      contents: read
-      # actions/configure-pages reads the repository's Pages settings.
-      pages: read
     steps:
       - name: Checkout
         uses: actions/checkout@v7
@@ -43,8 +40,8 @@ jobs:
           sudo dpkg -i "${RUNNER_TEMP}/${deb}"
           hugo version
 
-      # The runner's preinstalled Node runs these dependency-free tests; nothing is installed.
-      - name: Test the site scripts
+      # The runner's preinstalled Node runs this dependency-free test; nothing is installed.
+      - name: Test the Netlify footer credit
         run: node --test tests/*.test.js
 
       - name: Setup Pages
@@ -62,12 +59,9 @@ jobs:
           path: ./public
 
   deploy:
-    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    if: github.event_name != 'pull_request'
     needs: build
     runs-on: ubuntu-latest
-    permissions:
-      pages: write
-      id-token: write
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}

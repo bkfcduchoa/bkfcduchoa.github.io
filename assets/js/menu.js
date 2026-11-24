@@ -8,7 +8,6 @@
     if (open) header.setAttribute('data-open', '');
     else header.removeAttribute('data-open');
     button.setAttribute('aria-expanded', String(open));
-    button.setAttribute('aria-label', open ? 'Đóng menu' : 'Mở menu');
   }
 
   button.addEventListener('click', function () {

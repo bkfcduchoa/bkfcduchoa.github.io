@@ -165,6 +165,7 @@ a.chip:hover {
   gap: 0.4rem;
   margin: 1rem 0 0;
   font-size: 0.92rem;
+  opacity: 0.92;
 }
 
 .hero-details {
@@ -390,35 +391,28 @@ a.chip:hover {
 }
 
 .about summary {
-  display: inline-block;
-  margin-bottom: 0.5rem;
   list-style: none;
   cursor: pointer;
-  color: var(--link);
-  font-weight: 600;
 }
 
 .about summary::-webkit-details-marker {
   display: none;
 }
 
-.about > p {
+.about summary p {
   margin: 0 0 0.5rem;
 }
 
-/* The arrows are decoration: empty alt text keeps them out of the button name. */
+.about-more {
+  color: var(--link);
+  font-weight: 600;
+}
+
 .about-more::after {
   content: " ▾";
-  content: " ▾" / "";
 }
 
-.about-less::after {
-  content: " ▴";
-  content: " ▴" / "";
-}
-
-.about details[open] .about-more,
-.about details:not([open]) .about-less {
+.about[open] .about-more {
   display: none;
 }
 
